@@ -45,7 +45,7 @@
 													<th>NRP</th>
 													<th>Nama</th>
 													<th>Status</th>
-													<th>Keterangan</th>
+													<th>Catatan</th>
 													<th>Action</th>
 												</tr>
 											</thead>
