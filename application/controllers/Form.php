@@ -19,9 +19,9 @@ class Form extends CI_Controller {
 	public function index()
 	{
 		$this->load->helper('url');
-		$this->load->view('master/header');
+		$this->load->view('master/Instansi/Instansi/header');
 		$this->load->view('pages/form');
-		$this->load->view('master/navigation');
+		$this->load->view('master/Instansi/navigation');
 		$this->load->view('master/allJs');
 		$this->load->view('master/footer');
 	}
@@ -29,9 +29,9 @@ class Form extends CI_Controller {
 	public function daftarMahasiswa()
 	{
 		$this->load->helper('url');
-		$this->load->view('master/header');
-		$this->load->view('pages/daftarMahasiswa');
-		$this->load->view('master/navigation');
+		$this->load->view('master/Instansi/header');
+		$this->load->view('pages/Instansi/daftarMahasiswa');
+		$this->load->view('master/Instansi/navigation');
 		$this->load->view('master/tableJs');
 		$this->load->view('master/footer');
 	}
@@ -39,9 +39,9 @@ class Form extends CI_Controller {
 	public function detailMahasiswa()
 	{
 		$this->load->helper('url');
-		$this->load->view('master/header');
-		$this->load->view('pages/detailMahasiswa');
-		$this->load->view('master/navigation');
+		$this->load->view('master/Instansi/header');
+		$this->load->view('pages/Instansi/detailMahasiswa');
+		$this->load->view('master/Instansi/navigation');
 		$this->load->view('master/tableJs');
 		$this->load->view('master/footer');
 	}
@@ -49,9 +49,9 @@ class Form extends CI_Controller {
 	public function daftarSyaratYudisium()
 	{
 		$this->load->helper('url');
-		$this->load->view('master/header');
-		$this->load->view('pages/daftarSyaratYudisium');
-		$this->load->view('master/navigation');
+		$this->load->view('master/Instansi/header');
+		$this->load->view('pages/Instansi/daftarSyaratYudisium');
+		$this->load->view('master/Instansi/navigation');
 		$this->load->view('master/tableJs');
 		$this->load->view('master/footer');
 	}
@@ -59,9 +59,9 @@ class Form extends CI_Controller {
 	public function addSyaratYudisium()
 	{
 		$this->load->helper('url');
-		$this->load->view('master/header');
-		$this->load->view('pages/addSyaratYudisium');
-		$this->load->view('master/navigation');
+		$this->load->view('master/Instansi/header');
+		$this->load->view('pages/Instansi/addSyaratYudisium');
+		$this->load->view('master/Instansi/navigation');
 		$this->load->view('master/tableJs');
 		$this->load->view('master/footer');
 	}
@@ -69,9 +69,9 @@ class Form extends CI_Controller {
 	public function addCatatan()
 	{
 		$this->load->helper('url');
-		$this->load->view('master/header');
-		$this->load->view('pages/addCatatan');
-		$this->load->view('master/navigation');
+		$this->load->view('master/Instansi/header');
+		$this->load->view('pages/Instansi/addCatatan');
+		$this->load->view('master/Instansi/navigation');
 		$this->load->view('master/tableJs');
 		$this->load->view('master/footer');
 	}

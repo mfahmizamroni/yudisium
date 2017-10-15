@@ -25,7 +25,7 @@ class Mhs extends CI_Controller {
 		$this->load->view('master/tableJs');
 		$this->load->view('master/footer');
 	}
-	public function addKeterangan()
+	public function detailSyaratYudisium()
 	{
 		$this->load->helper('url');
 		$this->load->view('master/Mhs/headerMhs');
