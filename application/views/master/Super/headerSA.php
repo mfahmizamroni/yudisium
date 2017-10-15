@@ -40,7 +40,7 @@
             <ul class="header-nav header-nav-options">
               <li class="header-nav-brand" >
                 <div class="brand-holder">
-                  <a href="<?php echo base_url();?>Mhs">
+                  <a href="<?php echo base_url();?>form/daftarMahasiswa">
                     <span class="text-lg text-bold text-primary">SIM Yudisium</span>
                   </a>
                 </div>
@@ -63,8 +63,18 @@
 
             <ul class="header-nav header-nav-options">
               <li class="hidden-xs">
-                <a href="<?php echo base_url();?>Mhs" class="btn btn-flat ink-reaction btn-primary ">
-                  Form Kelengkapan
+                <a href="" class="btn btn-flat ink-reaction btn-primary ">
+                  Mahasiswa
+                </a>
+              </li>
+              <li class="hidden-xs">
+                <a href="" class="btn btn-flat ink-reaction btn-primary ">
+                  Instansi
+                </a>
+              </li>
+              <li class="hidden-xs">
+                <a href="" class="btn btn-flat ink-reaction btn-primary ">
+                  Syarat Yudisium
                 </a>
               </li>
             </ul>
@@ -75,8 +85,8 @@
                 <a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">
                   <i class="fa fa-circle text-primary text-lg"></i>
                   <span class="profile-info">
-                    Muchammad Fahmi
-                    <small>5213100092</small>
+                    Super Admin
+                    <small>Information System</small>
                   </span>
                 </a>
                 <ul class="dropdown-menu animation-dock">
