@@ -1,7 +1,7 @@
 (function (namespace, $) {
 	"use strict";
 
-	var DemoUIMessages = function () {
+	var valerror = function () {
 		// Create reference to this instance
 		var o = this;
 		// Initialize app when document is ready
@@ -10,7 +10,7 @@
 		});
 
 	};
-	var p = DemoUIMessages.prototype;
+	var p = valerror.prototype;
 
 	// =========================================================================
 	// MEMBER
@@ -49,7 +49,7 @@
 			o._toastrStateConfig();
 			toastr.options.progressBar = true;
 			toastr.options.positionClass = "toast-top-center";
-			toastr.info('<i class="fa fa-info"></i>  Username atau Password salah', '');
+			toastr.info('<i class="fa fa-info"></i>'+'<?php echo "asd"; ?>', '');
 		});
 	};
 
@@ -73,5 +73,5 @@
 	};
 
 	// =========================================================================
-	namespace.DemoUIMessages = new DemoUIMessages;
+	namespace.valerror = new valerror;
 }(this.materialadmin, jQuery)); // pass in (namespace, jQuery):

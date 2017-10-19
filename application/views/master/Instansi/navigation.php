@@ -51,3 +51,6 @@
         </div><!--end .menubar-scroll-panel-->
       </div><!--end #menubar-->
       <!-- END MENUBAR -->
+
+</div><!--end #base-->
+<!-- END BASE -->

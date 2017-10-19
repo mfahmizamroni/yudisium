@@ -6,8 +6,8 @@
 				<div class="section-body contain-lg">
 					<div class="row">
 						<div class="col-lg-12 text-center">
-							<h1><span class="text-xl text-light">Enterprise System</span></h1>
-							<h2><span class="text-light">Laboratory</span></h2>
+							<h1><span class="text-xl text-light"><?= $this->session->userdata('civitas_nama') ?></span></h1>
+							<h2><span class="text-light"><?= $this->session->userdata('civitas_tipe') ?></span></h2>
 							<h3 class="text-light">Detail Berkas Mahasiswa</i></h2>
 							</div><!--end .col -->
 						</div><!--end .row -->
@@ -22,7 +22,7 @@
 					<!-- begin identitas -->
 					<div class="row">
 						<div class="col-lg-12">
-							<h1 class="text-primary">Muchammad Fahmi Zamroni</h1>
+							<h1 class="text-primary"><?= $mahasiswa[0]->mhs_nama ?> <small><?= $mahasiswa[0]->mhs_nrp ?></small></h1>
 						</div><!--end .col -->
 					</div><!--end .row -->
 					<br>
@@ -33,7 +33,7 @@
 								<header><i class="fa fa-fw fa-tag"></i> Form Bebas Laboratory</header>
 							</div>
 							<!--end .card-head -->
-
+							<?= form_open() ?>
 							<div class="card-body style-default-bright table-responsive">
 								<table class="table no-margin">
 									<thead>
@@ -41,27 +41,32 @@
 											<th>#</th>
 											<th>Syarat Yudisium</th>
 											<th>Deskripsi</th>
-											<th>Link</th>
+											<th>Bukti</th>
 										</tr>
 									</thead>
 									<tbody>
+										<?php 
+										$a=1;
+										foreach ($mahasiswa as $mahasiswas) { ?>
 										<tr>
-											<td>1</td>
-											<td>Mengumpulkan File Berkas File Tugas Akhir</td>
-											<td>-</td>
-											<td>http://link.com/gdjag/dgsjf</td>
+											<td><?php echo $a; ?></td>
+											<input type="hidden" name="jms<?=$a?>" value="<?= $mahasiswas->jms_id ?>">
+											<td><?= $mahasiswas->syarat_nama ?></td>
+											<td><?= $mahasiswas->syarat_deskripsi ?></td>
+											<td><?= $mahasiswas->jms_bukti ?></td>
 										</tr>
+										<?php $a++; } ?>
 									</tbody>
 								</table>
 								<br>
 								<div class="card-actionbar">
 								<div class="card-actionbar-row style-default-bright">
-									<a href=<?php echo base_url();?>form/addCatatan><button class="btn ink-reaction btn-default">Tulis Catatan</button></a>
-									<button class="btn ink-reaction btn-primary">Approve</button>
+									<a href="<?= base_url()."form/addCatatan/".$mahasiswa[0]->jmc_id ?>" class="btn ink-reaction btn-default">Tulis Catatan</a>
+									<button class="btn ink-reaction btn-primary" type="submit">Approve</button>
 								</div>
-
 							</div>
 							</div>
+							</form>
 							<!--end .card-body -->
 							<!--  --><!--end .card -->	
 						</div><!--end .col -->
