@@ -6,8 +6,8 @@
 				<div class="section-body contain-lg">
 					<div class="row">
 						<div class="col-lg-12 text-center">
-							<h1><span class="text-xl text-light">Enterprise System</span></h1>
-							<h2><span class="text-light">Laboratory</span></h2>
+							<h1><span class="text-xl text-light"><?= $this->session->userdata('civitas_nama') ?></span></h1>
+							<h2><span class="text-light"><?= $this->session->userdata('civitas_tipe') ?></span></h2>
 							<h3 class="text-light">Cari Daftar Mahasiswa Yudisium <i class="fa fa-search-minus text-primary"></i></h2>
 							</div><!--end .col -->
 						</div><!--end .row -->
@@ -20,8 +20,8 @@
 					<div class="section-body contain-sm">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-search"></i></span>
-							<input type="text" class="form-control" placeholder="You're searching for...">
-							<span class="input-group-btn"><button class="btn btn-primary" type="submit">Find</button></span>
+							<input id="searchMhs" type="text" class="form-control" placeholder="You're searching for...">
+							<span class="input-group-btn"><button class="btn btn-primary" type="submit" id="search">Find</button></span>
 						</div>
 					</div><!--end .section-body -->
 				</section>
@@ -31,6 +31,7 @@
 				<div class="col-md-2"></div>
 				<div class="col-md-8">
 					<div class="card">
+						<?= form_open() ?>
 						<div class="card-body">
 							<!-- BEGIN DATATABLE 1 -->
 							<div class="row">
@@ -50,24 +51,25 @@
 												</tr>
 											</thead>
 											<tbody>
-												
 												<?php 
 												$a=1;
-												for ($i=0; $i < 20; $i++) { 
-													?>
+												foreach ($mahasiswa as $mahasiswas) { ?>
 													<tr>
 														<td><?php echo $a; ?></td>
-														<td>5213100092</td>
-														<td>Fahmi</td>
-														<td><button class="btn btn-xs ink-reaction btn-danger disabled">Not Approved</button></td>
-														<td>-</td>
+														<input type="hidden" name="mhs[]" value="<?= $mahasiswas->mhs_id ?>" disabled>
+														<td><?= $mahasiswas->mhs_nrp ?></td>
+														<td><?= $mahasiswas->mhs_nama ?></td>
+														<?php if ($mahasiswas->minstat == 0) { ?>
+															<td><a class="btn btn-xs ink-reaction btn-danger disabled">Not Approved</a></td>
+														<?php } else { ?>
+															<td><a class="btn btn-xs ink-reaction btn-success">Approved</a></td>
+														<?php } ?>
+														<td><?= $mahasiswas->jmc_catatan ?></td>
 														<td>
-															<a href="<?php echo base_url();?>form/detailMahasiswa"><button class="btn btn-xs ink-reaction btn-primary">Details</button></a>
+															<a href="<?= base_url()."form/detailMahasiswa/".$mahasiswas->mhs_id?>" class="btn btn-xs ink-reaction btn-primary">Details</a>
 														</td>
 													</tr>
-													<?php
-													$a++;
-												} ?>
+												<?php $a++; } ?>
 											</tbody>
 										</table>
 									</div><!--end .table-responsive -->
@@ -83,12 +85,13 @@
 										<span class="caret"></span>
 									</button>
 									<ul class="dropdown-menu pull-right" role="menu">
-										<li><a href="#">Approve</a></li>
-										<li><a href="#">Cancel Approval</a></li>
+										<li><a href=""><button type="submit" class="btn btn-primary" name="status" value="1">Approve</button></a></li>
+										<li><a href=""><button type="submit" class="btn btn-danger" name="status" value="0">Cancel Approval</button></a></li>
 									</ul>
 								</div>
 							</div>
 						</div>
+						</form>
 						<br>
 					</div><!--end .card -->
 					<br><br><br>

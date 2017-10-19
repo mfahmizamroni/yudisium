@@ -1,12 +1,9 @@
-<!-- BEGIN JAVASCRIPT -->
 <script src="<?php echo base_url(); ?>assets/js/libs/jquery/jquery-1.11.2.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/libs/jquery/jquery-migrate-1.2.1.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/libs/jquery-ui/jquery-ui.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/libs/bootstrap/bootstrap.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/libs/spin.js/spin.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/libs/autosize/jquery.autosize.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/libs/DataTables/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/libs/DataTables/extensions/ColVis/js/dataTables.colVis.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/libs/DataTables/extensions/TableTools/js/dataTables.tableTools.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/libs/nanoscroller/jquery.nanoscroller.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/libs/toastr/toastr.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/core/source/App.js"></script>
@@ -17,7 +14,7 @@
 <script src="<?php echo base_url(); ?>assets/js/core/source/AppNavSearch.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/core/source/AppVendor.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/core/demo/Demo.js"></script>
-<?php if ($this->session->flashdata('success')) { ?>
+<?php if (validation_errors() || isset($error)) { ?>
 <script>
 	$(document).ready( function (e) {
 		toastr.clear();
@@ -36,10 +33,9 @@
 		toastr.options.hideMethod = 'slideUp';
 		toastr.options.progressBar = true;
 		toastr.options.positionClass = "toast-top-center";
-		toastr.info('<i class="fa fa-info"></i> <?= $this->session->flashdata('success') ?>', '');
+		toastr.info('<p><font color=red><i class="fa fa-info"></i> ERROR</font></p><?= trim(preg_replace('~[\r\n]+~', '', validation_errors())) ?>', '');
 
 	});
 </script>
 <?php } ?>
-<!-- <script src="<?php echo base_url(); ?>assets/js/core/demo/DemoTableDynamic.js"></script>  -->
-<!-- END JAVASCRIPT -->
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
