@@ -45,11 +45,12 @@ class Mhs extends CI_Controller {
 		$this->load->library('form_validation');
 
 		$data = new stdClass();
+		$civitas = $this->civitas_model->get_civitas($civitas_id);
 		$syarat = $this->syarat_model->get_syarat_per_civitas_per_mhs($civitas_id, $this->session->userdata('id'));
 
 		$this->form_validation->set_rules('syarat[]', '', 'required');
 
-		$data = array('syarat'=>$syarat);
+		$data = array('syarat'=>$syarat,'civitas'=>$civitas);
 
 		if ($this->form_validation->run() === false) {
 			if ($this->session->has_userdata('nama')) {

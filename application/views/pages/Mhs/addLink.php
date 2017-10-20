@@ -6,8 +6,8 @@
 				<div class="section-body contain-lg">
 					<div class="row">
 						<div class="col-lg-12 text-center">
-							<h1><span class="text-xl text-light">Enterprise System</span></h1>
-							<h2><span class="text-light">Laboratory</span></h2>
+							<h1><span class="text-xl text-light"><?= $civitas->civitas_nama ?></span></h1>
+							<h2><span class="text-light"><?= $civitas->civitas_tipe ?></span></h2>
 							<h3 class="text-light">Detail Berkas Mahasiswa</h3>
 						</div><!--end .col -->
 					</div><!--end .row -->
