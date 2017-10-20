@@ -94,7 +94,7 @@
                   <li class="dropdown-header">Config</li>
                   <li><a href=""><i class="fa fa-fw fa-user"></i>My profile</a></li>
                   <hr>
-                  <li><a href=""><i class="fa fa-fw fa-power-off text-danger"></i> Logout</a></li>
+                  <li><a href="<?= base_url()."user/logout" ?>"><i class="fa fa-fw fa-power-off text-danger"></i> Logout</a></li>
                 </ul><!--end .dropdown-menu -->
               </li><!--end .dropdown -->
             </ul><!--end .header-nav-profile -->

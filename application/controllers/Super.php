@@ -13,17 +13,22 @@ class Super extends CI_Controller {
 		
 		parent::__construct();
 		$this->load->helper(array('url'));
-		
+		$this->load->library('session');
 	}
 
 	public function index()
 	{
-		$this->load->helper('url');
-		$this->load->view('master/Super/headerSA');
-		$this->load->view('pages/Super/daftarMahasiswa');
-		$this->load->view('master/Super/navigationSA');
-		$this->load->view('master/tableJs');
-		$this->load->view('master/footer');
+		if ($this->session->has_userdata('username') && $this->session->userdata('role') == 0) {
+			$this->load->helper('url');
+			$this->load->view('master/Super/headerSA');
+			$this->load->view('pages/Super/Mhs/daftarMahasiswa');
+			$this->load->view('master/Super/navigationSA');
+			$this->load->view('master/tableJs');
+			$this->load->view('master/footer');
+		} else {
+			$this->load->helper('url');
+			header('location:'.base_url().'user/login');
+		}
 	}
 
 	public function addMahasiswa()

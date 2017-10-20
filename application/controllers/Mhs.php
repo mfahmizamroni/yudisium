@@ -128,9 +128,14 @@ class Mhs extends CI_Controller {
 		
 		if ($this->form_validation->run() == false) {
 			
-			// validation not ok, send validation errors to the view
-			$this->load->helper('url');
-			$this->load->view('loginMhs');
+			if ($this->session->has_userdata('nama')) {
+				$this->load->helper('url');
+				header('location:'.base_url().'mhs');
+			} else {
+				// validation not ok, send validation errors to the view
+				$this->load->helper('url');
+				$this->load->view('loginMhs');
+			}
 			
 		} else {
 			

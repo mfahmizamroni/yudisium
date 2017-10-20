@@ -21,12 +21,18 @@ class Form extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->helper('url');
-		$this->load->view('master/Instansi/header');
-		$this->load->view('pages/form');
-		$this->load->view('master/Instansi/navigation');
-		$this->load->view('master/allJs');
-		$this->load->view('master/footer');
+		$this->load->library('session');
+		if ($this->session->has_userdata('username')) {
+			$this->load->helper('url');
+			$this->load->view('master/Instansi/header');
+			$this->load->view('pages/form');
+			$this->load->view('master/Instansi/navigation');
+			$this->load->view('master/allJs');
+			$this->load->view('master/footer');
+		} else {
+			$this->load->helper('url');
+			header('location:'.base_url().'user/login');
+		}
 	}
 
 	public function daftarMahasiswa()
@@ -43,13 +49,19 @@ class Form extends CI_Controller {
 		$this->form_validation->set_rules('mhs[]', 'mhs', 'required');
 
 		if ($this->form_validation->run() === false) {
-			$this->load->helper('url');
-			$this->load->view('master/Instansi/header');
-			$this->load->view('pages/Instansi/daftarMahasiswa', $data);
-			$this->load->view('master/Instansi/navigation');
-			$this->load->view('master/tableJs');
-			$this->load->view('pages/Instansi/searchJs');
-			$this->load->view('master/footer');
+			$this->load->library('session');
+			if ($this->session->has_userdata('username')) {
+				$this->load->helper('url');
+				$this->load->view('master/Instansi/header');
+				$this->load->view('pages/Instansi/daftarMahasiswa', $data);
+				$this->load->view('master/Instansi/navigation');
+				$this->load->view('master/tableJs');
+				$this->load->view('pages/Instansi/searchJs');
+				$this->load->view('master/footer');
+			} else {
+				$this->load->helper('url');
+				header('location:'.base_url().'user/login');
+			}
 		} else {
 			$temp = "";
 			$mhs = $this->input->post('mhs');
