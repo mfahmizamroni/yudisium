@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 19, 2017 at 08:15 PM
+-- Generation Time: Oct 20, 2017 at 01:40 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -57,7 +57,7 @@ CREATE TABLE `civitas` (
   `civitas_nama` varchar(30) NOT NULL,
   `civitas_tipe` varchar(30) NOT NULL,
   `civitas_form_bebas` varchar(100) DEFAULT NULL,
-  `civitas_departemen` varchar(100) NOT NULL,
+  `civitas_departemen_id` int(100) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -66,8 +66,8 @@ CREATE TABLE `civitas` (
 -- Dumping data for table `civitas`
 --
 
-INSERT INTO `civitas` (`civitas_id`, `civitas_nama`, `civitas_tipe`, `civitas_form_bebas`, `civitas_departemen`, `created_at`, `updated_at`) VALUES
-(1, 'Ruang Baca Sistem Informasi', 'Ruang Baca', 'Form Bebas RBSI', 'Sistem Informasi', '2017-10-19 11:03:00', '0000-00-00 00:00:00');
+INSERT INTO `civitas` (`civitas_id`, `civitas_nama`, `civitas_tipe`, `civitas_form_bebas`, `civitas_departemen_id`, `created_at`, `updated_at`) VALUES
+(1, 'Ruang Baca Sistem Informasi', 'Ruang Baca', 'Form Bebas RBSI', 1, '2017-10-20 10:26:10', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -99,6 +99,26 @@ INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('jssivbiritoqhj2lfhf8qerr7s01iovq', '::1', 1508410567, 0x5f5f63695f6c6173745f726567656e65726174657c693a313530383431303536313b757365726e616d657c733a373a226261736b617261223b656d61696c7c733a31373a226261736b61726140676d61696c2e636f6d223b636976697461735f6e616d617c733a32373a225275616e6720426163612053697374656d20496e666f726d617369223b636976697461735f746970657c733a31303a225275616e672042616361223b6c6f676765645f696e7c623a313b),
 ('ma84atr9c1lo13gj7vqghdll8v2s0tn4', '::1', 1508412776, 0x5f5f63695f6c6173745f726567656e65726174657c693a313530383431323439353b757365726e616d657c733a373a226261736b617261223b656d61696c7c733a31373a226261736b61726140676d61696c2e636f6d223b636976697461735f6e616d617c733a32373a225275616e6720426163612053697374656d20496e666f726d617369223b636976697461735f746970657c733a31303a225275616e672042616361223b6c6f676765645f696e7c623a313b636976697461735f69647c733a313a2231223b),
 ('pghpbmd2d6knt7tmr6irujdpd7vqq7vm', '::1', 1508409463, 0x5f5f63695f6c6173745f726567656e65726174657c693a313530383430393436333b);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `departemen`
+--
+
+CREATE TABLE `departemen` (
+  `departemen_id` int(11) NOT NULL,
+  `departemen_nama` varchar(100) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `departemen`
+--
+
+INSERT INTO `departemen` (`departemen_id`, `departemen_nama`, `created_at`, `updated_at`) VALUES
+(1, 'Sistem Informasi', '2017-10-20 10:25:52', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -144,18 +164,16 @@ CREATE TABLE `junc_mhs_syarat` (
 --
 
 INSERT INTO `junc_mhs_syarat` (`jms_id`, `jms_mhs_id`, `jms_syarat_id`, `jms_status`, `jms_bukti`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 0, '', '2017-10-19 18:11:55', '2017-10-19 20:11:55'),
-(2, 1, 2, 0, '', '2017-10-19 18:11:55', '2017-10-19 20:11:55'),
-(3, 2, 1, 0, '', '2017-10-19 18:11:55', '2017-10-19 20:11:55'),
-(4, 2, 2, 0, '', '2017-10-19 18:11:55', '2017-10-19 20:11:55'),
-(5, 1, 3, 0, '', '2017-10-19 18:11:55', '2017-10-19 20:11:55'),
-(6, 2, 3, 0, '', '2017-10-19 18:11:55', '2017-10-19 20:11:55'),
-(7, 1, 4, 0, '', '2017-10-19 18:11:55', '2017-10-19 20:11:55'),
-(8, 2, 4, 0, '', '2017-10-19 18:11:55', '2017-10-19 20:11:55'),
-(9, 1, 5, 0, '', '2017-10-19 18:11:55', '2017-10-19 20:11:55'),
-(10, 2, 5, 0, '', '2017-10-19 18:11:55', '2017-10-19 20:11:55'),
-(11, 1, 6, 0, '', '2017-10-19 18:11:55', '2017-10-19 20:11:55'),
-(12, 2, 6, 0, '', '2017-10-19 18:11:55', '2017-10-19 20:11:55');
+(1, 1, 1, 1, 'https://github.com/mfahmizamroni/yudisium', '2017-10-20 11:30:59', '2017-10-20 13:30:59'),
+(2, 1, 2, 1, 'testest', '2017-10-20 11:30:59', '2017-10-20 13:30:59'),
+(3, 2, 1, 1, '', '2017-10-20 11:31:02', '2017-10-20 13:31:02'),
+(4, 2, 2, 1, '', '2017-10-20 11:31:02', '2017-10-20 13:31:02'),
+(5, 1, 3, 1, 'asd', '2017-10-20 11:30:59', '2017-10-20 13:30:59'),
+(6, 2, 3, 1, '', '2017-10-20 11:31:02', '2017-10-20 13:31:02'),
+(7, 1, 4, 1, '', '2017-10-20 11:30:59', '2017-10-20 13:30:59'),
+(8, 2, 4, 1, '', '2017-10-20 11:31:02', '2017-10-20 13:31:02'),
+(9, 1, 5, 1, '', '2017-10-20 11:30:59', '2017-10-20 13:30:59'),
+(10, 2, 5, 1, '', '2017-10-20 11:31:02', '2017-10-20 13:31:02');
 
 -- --------------------------------------------------------
 
@@ -169,6 +187,7 @@ CREATE TABLE `mhs` (
   `mhs_nrp` varchar(20) NOT NULL,
   `mhs_password` varchar(100) NOT NULL,
   `mhs_jenjang` varchar(10) NOT NULL,
+  `mhs_departemen_id` int(100) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -177,9 +196,9 @@ CREATE TABLE `mhs` (
 -- Dumping data for table `mhs`
 --
 
-INSERT INTO `mhs` (`mhs_id`, `mhs_nama`, `mhs_nrp`, `mhs_password`, `mhs_jenjang`, `created_at`, `updated_at`) VALUES
-(1, 'Baskara Sakti Mintarum', '5213100153', '$2y$10$vjD.8/pXbqDJTGBs6/ycqOjA8UteJCRfZ7roBrv51IhD1XXfyHWhe', 'S1', '2017-10-19 11:01:15', '0000-00-00 00:00:00'),
-(2, 'Muhammad Fahmi Zamroni', '5213100092', '$2y$10$vjD.8/pXbqDJTGBs6/ycqOjA8UteJCRfZ7roBrv51IhD1XXfyHWhe', 'S1', '2017-10-19 11:02:16', '0000-00-00 00:00:00');
+INSERT INTO `mhs` (`mhs_id`, `mhs_nama`, `mhs_nrp`, `mhs_password`, `mhs_jenjang`, `mhs_departemen_id`, `created_at`, `updated_at`) VALUES
+(1, 'Baskara Sakti Mintarum', '5213100153', '$2y$10$vjD.8/pXbqDJTGBs6/ycqOjA8UteJCRfZ7roBrv51IhD1XXfyHWhe', 'S1', 1, '2017-10-20 10:26:49', '0000-00-00 00:00:00'),
+(2, 'Muhammad Fahmi Zamroni', '5213100092', '$2y$10$vjD.8/pXbqDJTGBs6/ycqOjA8UteJCRfZ7roBrv51IhD1XXfyHWhe', 'S1', 1, '2017-10-20 10:26:52', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -206,8 +225,7 @@ INSERT INTO `syarat` (`syarat_id`, `syarat_nama`, `syarat_deskripsi`, `syarat_je
 (2, 'Mengumpulkan Hard Copy Buku TA', '', 'hard copy', 1, '2017-10-19 11:05:25', '0000-00-00 00:00:00'),
 (3, 'upload sesuatu', 'testestes', 'upload link', 1, '2017-10-19 10:04:37', '0000-00-00 00:00:00'),
 (4, 'tetsets', 'asdasdasd', 'hard copy', 1, '2017-10-19 10:07:34', '0000-00-00 00:00:00'),
-(5, 'coba', 'coba2', 'upload link', 1, '2017-10-19 10:07:56', '0000-00-00 00:00:00'),
-(6, 'tetsetsoooo', 'asdasdasd', 'hard copy', 1, '2017-10-19 10:17:16', '0000-00-00 00:00:00');
+(5, 'coba', 'coba2', 'upload link', 1, '2017-10-19 10:07:56', '0000-00-00 00:00:00');
 
 --
 -- Indexes for dumped tables
@@ -231,6 +249,12 @@ ALTER TABLE `civitas`
 ALTER TABLE `ci_sessions`
   ADD PRIMARY KEY (`id`,`ip_address`) USING BTREE,
   ADD KEY `ci_sessions_timestamp` (`timestamp`);
+
+--
+-- Indexes for table `departemen`
+--
+ALTER TABLE `departemen`
+  ADD PRIMARY KEY (`departemen_id`);
 
 --
 -- Indexes for table `junc_mhs_civitas`
@@ -271,6 +295,11 @@ ALTER TABLE `adm`
 ALTER TABLE `civitas`
   MODIFY `civitas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
+-- AUTO_INCREMENT for table `departemen`
+--
+ALTER TABLE `departemen`
+  MODIFY `departemen_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT for table `junc_mhs_civitas`
 --
 ALTER TABLE `junc_mhs_civitas`
@@ -279,7 +308,7 @@ ALTER TABLE `junc_mhs_civitas`
 -- AUTO_INCREMENT for table `junc_mhs_syarat`
 --
 ALTER TABLE `junc_mhs_syarat`
-  MODIFY `jms_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `jms_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `mhs`
 --
@@ -289,7 +318,7 @@ ALTER TABLE `mhs`
 -- AUTO_INCREMENT for table `syarat`
 --
 ALTER TABLE `syarat`
-  MODIFY `syarat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;COMMIT;
+  MODIFY `syarat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
