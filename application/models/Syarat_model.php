@@ -79,10 +79,10 @@ class Syarat_model extends CI_Model {
 		return $id;
 	}
 
-	public function update_status_jms($jms_id)
+	public function update_status_jms($jms_id, $status)
 	{
 		$data = array(
-			'jms_status'   		=> 1,
+			'jms_status'   		=> $status,
 			'updated_at'		=> date('Y-m-j H:i:s'),
 		);
 		

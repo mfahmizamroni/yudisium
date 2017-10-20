@@ -41,7 +41,9 @@
 											<th>#</th>
 											<th>Syarat Yudisium</th>
 											<th>Deskripsi</th>
+											<th>Tipe</th>
 											<th>Bukti</th>
+											<th>Status</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -53,7 +55,16 @@
 											<input type="hidden" name="jms<?=$a?>" value="<?= $mahasiswas->jms_id ?>">
 											<td><?= $mahasiswas->syarat_nama ?></td>
 											<td><?= $mahasiswas->syarat_deskripsi ?></td>
+											<td><?= $mahasiswas->syarat_jenis?></td>
 											<td><?= $mahasiswas->jms_bukti ?></td>
+											<td>
+												<div class="checkbox checkbox-styled">
+													<label>
+													<input type="checkbox" name="status<?= $a; ?>" value="1" <?php if ($mahasiswas->jms_status == 1) {echo "checked";} ?>>
+													</label>
+												</div>
+											</div>
+										</td>
 										</tr>
 										<?php $a++; } ?>
 									</tbody>
@@ -62,7 +73,7 @@
 								<div class="card-actionbar">
 								<div class="card-actionbar-row style-default-bright">
 									<a href="<?= base_url()."form/addCatatan/".$mahasiswa[0]->jmc_id ?>" class="btn ink-reaction btn-default">Tulis Catatan</a>
-									<button class="btn ink-reaction btn-primary" type="submit">Approve</button>
+									<button class="btn ink-reaction btn-primary" type="submit">Submit</button>
 								</div>
 							</div>
 							</div>

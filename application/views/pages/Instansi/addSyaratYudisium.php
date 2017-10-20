@@ -33,6 +33,9 @@
 								<label class="radio-inline radio-styled">
 									<input type="radio" name="jenis_file" checked><span>HardCopy</span>
 								</label>
+								<label class="radio-inline radio-styled">
+									<input type="radio" name="jenis_file" checked><span>Checked by Admin</span>
+								</label>
 							</div>
 						</div><!--end .card-body -->
 						<div class="card-actionbar">

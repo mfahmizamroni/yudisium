@@ -22,7 +22,7 @@ class Form extends CI_Controller {
 	public function index()
 	{
 		$this->load->helper('url');
-		$this->load->view('master/Instansi/Instansi/header');
+		$this->load->view('master/Instansi/header');
 		$this->load->view('pages/form');
 		$this->load->view('master/Instansi/navigation');
 		$this->load->view('master/allJs');
@@ -31,34 +31,6 @@ class Form extends CI_Controller {
 
 	public function daftarMahasiswa()
 	{
-<<<<<<< HEAD
-		$this->load->helper('url');
-		$this->load->view('master/Instansi/header');
-		$this->load->view('pages/Instansi/daftarMahasiswa');
-		$this->load->view('master/Instansi/navigation');
-		$this->load->view('master/tableJs');
-		$this->load->view('master/footer');
-	}
-
-	public function detailMahasiswa()
-	{
-		$this->load->helper('url');
-		$this->load->view('master/Instansi/header');
-		$this->load->view('pages/Instansi/detailMahasiswa');
-		$this->load->view('master/Instansi/navigation');
-		$this->load->view('master/tableJs');
-		$this->load->view('master/footer');
-	}
-
-	public function daftarSyaratYudisium()
-	{
-		$this->load->helper('url');
-		$this->load->view('master/Instansi/header');
-		$this->load->view('pages/Instansi/daftarSyaratYudisium');
-		$this->load->view('master/Instansi/navigation');
-		$this->load->view('master/tableJs');
-		$this->load->view('master/footer');
-=======
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 
@@ -123,19 +95,10 @@ class Form extends CI_Controller {
 				}
 			}
 		}
->>>>>>> master
 	}
 
 	public function detailMahasiswa($mhs_id)
 	{
-<<<<<<< HEAD
-		$this->load->helper('url');
-		$this->load->view('master/Instansi/header');
-		$this->load->view('pages/Instansi/addSyaratYudisium');
-		$this->load->view('master/Instansi/navigation');
-		$this->load->view('master/tableJs');
-		$this->load->view('master/footer');
-=======
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 
@@ -158,21 +121,28 @@ class Form extends CI_Controller {
 			$data =  new stdClass();
 			$i = 1;
 			$temp = "";
+
 			while ($this->input->post('jms'.$i)) {
 				$jms = $this->input->post('jms'.$i);
-				$temp = $this->syarat_model->update_status_jms($jms);
+				$status = $this->input->post('status'.$i);
+				$temp = $this->syarat_model->update_status_jms($jms, $status);
 				$i++;
 			}
 
 			if ($temp) {
-				$success = "Mahasiswa Approved";
-				$data = array('success' => $success );
+				$success = "Mahasiswa Updated";
+				$mahasiswa = $this->mhs_model->get_mhs_per_civitas_with_syarat_per_id($civitas_id, $mhs_id);
+
+				$data = array('success' => $success, 'mahasiswa' => $mahasiswa );
 
 				$this->load->library('session');
 				if ($this->session->has_userdata('username')) {
 					$this->load->helper('url');
-					header('location:'.base_url().'form/daftarMahasiswa');
-					$this->session->set_flashdata('success', $success);
+					$this->load->view('master/Instansi/header');
+					$this->load->view('pages/Instansi/detailMahasiswa', $data);
+					$this->load->view('master/Instansi/navigation');
+					$this->load->view('master/formJs');
+					$this->load->view('master/footer');
 				} else {
 					$this->load->helper('url');
 					header('location:'.base_url().'user/login');
@@ -197,19 +167,10 @@ class Form extends CI_Controller {
 				}
 			}
 		}
->>>>>>> master
 	}
 
 	public function addCatatan($jmc_id)
 	{
-<<<<<<< HEAD
-		$this->load->helper('url');
-		$this->load->view('master/Instansi/header');
-		$this->load->view('pages/Instansi/addCatatan');
-		$this->load->view('master/Instansi/navigation');
-		$this->load->view('master/tableJs');
-		$this->load->view('master/footer');
-=======
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 
@@ -263,6 +224,6 @@ class Form extends CI_Controller {
 				}
 			}
 		}
->>>>>>> master
+
 	}
 }

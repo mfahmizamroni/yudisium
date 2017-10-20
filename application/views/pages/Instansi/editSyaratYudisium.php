@@ -33,6 +33,9 @@
 								<label class="radio-inline radio-styled">
 									<input type="radio" name="jenis" value="hard copy" <?php if ($syarat->syarat_jenis == "hard copy") { echo "checked";} ?>><span>Hard Copy</span>
 								</label>
+								<label class="radio-inline radio-styled">
+									<input type="radio" name="jenis" value="checked by admin" <?php if ($syarat->syarat_jenis == "checked by admin") { echo "checked";} ?>><span>Checked by Admin</span>
+								</label>
 							</div>
 						</div><!--end .card-body -->
 						<div class="card-actionbar">
