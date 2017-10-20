@@ -21,6 +21,7 @@
   <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>assets/css/theme-default/libs/DataTables/jquery.dataTables.css" />
   <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>assets/css/theme-default/libs/DataTables/extensions/dataTables.colVis.css" />
   <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>assets/css/theme-default/libs/DataTables/extensions/dataTables.tableTools.css" />
+  <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>assets/css/theme-default/libs/toastr/toastr.css?1425466569" />
   <!-- END STYLESHEETS -->
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -75,15 +76,15 @@
                 <a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">
                   <i class="fa fa-circle text-primary text-lg"></i>
                   <span class="profile-info">
-                    Muchammad Fahmi
-                    <small>5213100092</small>
+                    <?= $this->session->userdata('nama') ?>
+                    <small><?= $this->session->userdata('nrp') ?></small>
                   </span>
                 </a>
                 <ul class="dropdown-menu animation-dock">
                   <li class="dropdown-header">Config</li>
                   <li><a href=""><i class="fa fa-fw fa-user"></i>My profile</a></li>
                   <hr>
-                  <li><a href=""><i class="fa fa-fw fa-power-off text-danger"></i> Logout</a></li>
+                  <li><a href="<?= base_url()."mhs/logout" ?>"><i class="fa fa-fw fa-power-off text-danger"></i> Logout</a></li>
                 </ul><!--end .dropdown-menu -->
               </li><!--end .dropdown -->
             </ul><!--end .header-nav-profile -->

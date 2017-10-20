@@ -37,6 +37,14 @@ class Mhs_model extends CI_Model {
 		return $this->db->get()->result();
 	}
 
+	public function get_mhs_departemen($mhs_id)
+	{
+		$this->db->from('mhs');
+		$this->db->join('departemen', 'mhs_departemen_id = departemen_id');
+		$this->db->where('mhs_id', $mhs_id);
+		return $this->db->get()->row();
+	}
+
 	public function get_mhs_per_civitas_with_syarat($civitas_id)
 	{
 		$this->db->select(array('*','MIN(jms_status) as minstat'));
@@ -60,5 +68,122 @@ class Mhs_model extends CI_Model {
 		$this->db->where('civitas_id', $civitas_id);
 		$this->db->where('mhs_id', $mhs_id);
 		return $this->db->get()->result();
+	}
+
+	/**
+	 * create_user function.
+	 * 
+	 * @access public
+	 * @param mixed $username
+	 * @param mixed $email
+	 * @param mixed $password
+	 * @return bool true on success, false on failure
+	 */
+	public function create_mhs($nama, $nrp, $password, $jenjang) {
+		
+		$data = array(
+			'mhs_nama'   		=> $nama,
+			'mhs_nrp'      		=> $nrp,
+			'mhs_password'   	=> $this->hash_password($password),
+			'mhs_jenjang'   	=> $jenjang,
+			'created_at' 		=> date('Y-m-j H:i:s'),
+		);
+		
+		return $this->db->insert('mhs', $data);
+		
+	}
+
+	public function update_mhs($id, $nama, $nrp, $password, $jenjang) {
+		
+		$data = array(
+			'mhs_nama'   		=> $nama,
+			'mhs_nrp'      		=> $nrp,
+			'mhs_password' 		=> $this->hash_password($password),
+			'mhs_jenjang' 		=> $jenjang,
+			'updated_at' 		=> date('Y-m-j H:i:s'),
+		);
+		
+		$this->db->where('mhs_id', $id);
+		$this->db->update('mhs', $data);
+		return $id;
+		
+	}
+	
+	/**
+	 * resolve_user_login function.
+	 * 
+	 * @access public
+	 * @param mixed $username
+	 * @param mixed $password
+	 * @return bool true on success, false on failure
+	 */
+	public function resolve_mhs_login($nrp, $password) {
+		
+		$this->db->select('mhs_password');
+		$this->db->from('mhs');
+		$this->db->where('mhs_nrp', $nrp);
+		$hash = $this->db->get()->row('mhs_password');
+		
+		return $this->verify_password_hash($password, $hash);
+		
+	}
+	
+	/**
+	 * get_user_id_from_username function.
+	 * 
+	 * @access public
+	 * @param mixed $username
+	 * @return int the adm id
+	 */
+	public function get_mhs_id_from_nrp($nrp) {
+		
+		$this->db->select('mhs_id');
+		$this->db->from('mhs');
+		$this->db->where('mhs_nrp', $nrp);
+		return $this->db->get()->row('mhs_id');
+		
+	}
+
+	public function delete_mhs($mhs_id) {
+		
+		$this->db->where('mhs_id', $mhs_id);
+		$this->db->delete('mhs');
+		return $mhs_id;
+		
+	}
+
+	public function get_mhs_by_nrp($nrp) {
+		
+		$this->db->from('mhs');
+		$this->db->where('mhs_nrp', $nrp);
+		return $this->db->get()->row();
+		
+	}
+	
+	/**
+	 * hash_password function.
+	 * 
+	 * @access private
+	 * @param mixed $password
+	 * @return string|bool could be a string on success, or bool false on failure
+	 */
+	private function hash_password($password) {
+		
+		return password_hash($password, PASSWORD_BCRYPT);
+		
+	}
+	
+	/**
+	 * verify_password_hash function.
+	 * 
+	 * @access private
+	 * @param mixed $password
+	 * @param mixed $hash
+	 * @return bool
+	 */
+	private function verify_password_hash($password, $hash) {
+		
+		return password_verify($password, $hash);
+		
 	}
 }

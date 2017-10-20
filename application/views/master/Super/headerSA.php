@@ -21,6 +21,7 @@
   <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>assets/css/theme-default/libs/DataTables/jquery.dataTables.css" />
   <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>assets/css/theme-default/libs/DataTables/extensions/dataTables.colVis.css" />
   <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>assets/css/theme-default/libs/DataTables/extensions/dataTables.tableTools.css" />
+  <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>assets/css/theme-default/libs/toastr/toastr.css?1425466569" />
   <!-- END STYLESHEETS -->
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->

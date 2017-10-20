@@ -36,6 +36,15 @@ class Syarat_model extends CI_Model {
 		return $this->db->get()->result();
 	}
 
+	public function get_syarat_per_civitas_per_mhs($civitas_id,$mhs_id)
+	{
+		$this->db->from('syarat');
+		$this->db->join('junc_mhs_syarat', 'jms_syarat_id = syarat_id');
+		$this->db->where('syarat_civitas_id', $civitas_id);
+		$this->db->where('jms_mhs_id', $mhs_id);
+		return $this->db->get()->result();
+	}
+
 	public function create_syarat($nama, $deskripsi, $jenis, $civitas)
 	{
 		$data = array(
@@ -99,6 +108,19 @@ class Syarat_model extends CI_Model {
 		);
 		
 		$this->db->where('jms_mhs_id', $mhs_id);
+		$this->db->update('junc_mhs_syarat', $data);
+		return $mhs_id;
+	}
+
+	public function update_bukti_jms_per_mahasiswa($mhs_id, $syarat_id, $bukti)
+	{
+		$data = array(
+			'jms_bukti'   		=> $bukti,
+			'updated_at'		=> date('Y-m-j H:i:s'),
+		);
+		
+		$this->db->where('jms_mhs_id', $mhs_id);
+		$this->db->where('jms_syarat_id', $syarat_id);
 		$this->db->update('junc_mhs_syarat', $data);
 		return $mhs_id;
 	}

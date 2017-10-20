@@ -137,12 +137,15 @@ class Form extends CI_Controller {
 
 				$this->load->library('session');
 				if ($this->session->has_userdata('username')) {
+					// $this->load->helper('url');
+					// $this->load->view('master/Instansi/header');
+					// $this->load->view('pages/Instansi/detailMahasiswa', $data);
+					// $this->load->view('master/Instansi/navigation');
+					// $this->load->view('master/formJs');
+					// $this->load->view('master/footer');
 					$this->load->helper('url');
-					$this->load->view('master/Instansi/header');
-					$this->load->view('pages/Instansi/detailMahasiswa', $data);
-					$this->load->view('master/Instansi/navigation');
-					$this->load->view('master/formJs');
-					$this->load->view('master/footer');
+					header('location:'.base_url().'form/daftarMahasiswa');
+					$this->session->set_flashdata('success', $success);
 				} else {
 					$this->load->helper('url');
 					header('location:'.base_url().'user/login');

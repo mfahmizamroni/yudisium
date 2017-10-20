@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Civitas Login</title>
+		<title>Mahasiswa Login</title>
 
 		<!-- BEGIN META -->
 		<meta charset="utf-8">
@@ -38,10 +38,10 @@
 							<br/>
 							<span class="text-lg text-bold text-primary">MATERIAL ADMIN</span>
 							<br/><br/>
-							<?= form_open('user/login', array('class' => "form floating-label" )) ?>
+							<?= form_open('mhs/login', array('class' => "form floating-label" )) ?>
 								<div class="form-group">
-									<input type="text" class="form-control" id="username" name="username">
-									<label for="username">Username</label>
+									<input type="text" class="form-control" id="username" name="nrp">
+									<label for="username">NRP</label>
 								</div>
 								<div class="form-group">
 									<input type="password" class="form-control" id="password" name="password">

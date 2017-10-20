@@ -7,7 +7,7 @@
 					<div class="row">
 						<div class="col-lg-12 text-center">
 							<h1><span class=" text-light">Form Kelengkapan Berkas Yudisium</span></h1>
-							<h2><span class="text-light">Departemen Sistem Informasi</span></h2>
+							<h2><span class="text-light">Departemen <?= $this->session->userdata('departemen') ?></span></h2>
 						</div><!--end .col -->
 					</div><!--end .row -->
 				</div><!--end .section-body -->
@@ -21,7 +21,7 @@
 				<!-- begin identitas -->
 				<div class="row">
 					<div class="col-lg-12">
-						<h1 class="text-primary">Muchammad Fahmi Zamroni</h1>
+						<h1 class="text-primary"><?= $this->session->userdata('nama') ?></h1>
 					</div><!--end .col -->
 				</div><!--end .row -->
 				<br>
@@ -45,56 +45,22 @@
 									</tr>
 								</thead>
 								<tbody>
+									<?php $a = 1;
+									foreach ($civitas as $civitass) { ?>
 									<tr>
-										<td>1</td>
-										<td>Mengumpulkan File Tugas Akhir</td>
+										<td><?= $a ?></td>
+										<td><?= $civitass->civitas_form_bebas ?></td>
+										<?php if ($civitass->minstat == 0) { ?>
+										<td><a class="btn btn-xs ink-reaction btn-danger disabled">Not Approved</a></td>
+										<?php } else { ?>
+										<td><a class="btn btn-xs ink-reaction btn-success">Approved</a></td>
+										<?php } ?>
+										<td><?= $civitass->jmc_catatan ?></td>
 										<td>
-											<button class="btn ink-reaction btn-xs btn-danger disabled">Not Approved</button>
-										</td>
-										<td>Belum Mengumpulkan Berkas</td>
-										<td>
-											<a href=""><button class="btn btn-primary btn-xs ink-reaction">Details</button></a>
-											
+											<a href="<?= base_url()."mhs/detailSyaratYudisium/".$civitass->civitas_id ?>"><button class="btn btn-primary btn-xs ink-reaction">Details</button></a>		
 										</td>
 									</tr>
-									<tr>
-										<td>2</td>
-										<td>Mengumpulkan File Tugas Akhir</td>
-										<td>
-											<button class="btn ink-reaction btn-xs btn-danger disabled">Not Approved</button>
-										</td>
-										<td>Belum Mengumpulkan Berkas</td>
-										<td>
-											<a href=""><button class="btn btn-primary btn-xs ink-reaction">Details</button></a>
-										</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>Mengumpulkan File Tugas Akhir</td>
-										<td>
-											<button class="btn ink-reaction btn-xs btn-danger disabled">Not Approved</button>
-										</td>
-										<td>Belum Mengumpulkan Berkas</td>
-										<td><button class="btn btn-primary btn-xs ink-reaction">Details</button></td>
-									</tr>
-									<tr>
-										<td>4</td>
-										<td>Mengumpulkan File Tugas Akhir</td>
-										<td>
-											<button class="btn ink-reaction btn-xs btn-danger disabled">Not Approved</button>
-										</td>
-										<td>Belum Mengumpulkan Berkas</td>
-										<td><button class="btn btn-primary btn-xs ink-reaction">Details</button></td>
-									</tr>
-									<tr>
-										<td>5</td>
-										<td>Mengumpulkan Buku (print) Tugas Akhir</td>
-										<td>
-											<button class="btn btn-xs ink-reaction btn-primary">Approved</button>
-										</td>
-										<td>Approved By Admin</td>
-										<td><button class="btn btn-primary btn-xs ink-reaction">Details</button></td>
-									</tr>
+									<?php $a++; } ?>
 								</tbody>
 							</table>
 							<br><br>
