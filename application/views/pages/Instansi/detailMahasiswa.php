@@ -30,7 +30,7 @@
 					<div class="col-md-12">
 						<div class="card card-bordered style-primary">
 							<div class="card-head">
-								<header><i class="fa fa-fw fa-tag"></i> Form Bebas Laboratory</header>
+								<header><i class="fa fa-fw fa-tag"></i> <?= $this->session->userdata('civitas_form_bebas') ?></header>
 							</div>
 							<!--end .card-head -->
 							<?= form_open() ?>
