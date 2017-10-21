@@ -31,6 +31,7 @@
 								<label for="Password2">Password</label>
 							</div>
 							<br>
+							<h2>Biodata Mahasiswa</h2>
 							<hr>
 							<div>
 								<label class="radio-inline radio-styled">
