@@ -63,8 +63,7 @@
 													<input type="checkbox" name="status<?= $a; ?>" value="1" <?php if ($mahasiswas->jms_status == 1) {echo "checked";} ?>>
 													</label>
 												</div>
-											</div>
-										</td>
+											</td>
 										</tr>
 										<?php $a++; } ?>
 									</tbody>

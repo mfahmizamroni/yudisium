@@ -50,10 +50,7 @@
           </div>
         </div><!--end .menubar-scroll-panel-->
       </div><!--end #menubar-->
-<<<<<<< HEAD
       <!-- END MENUBAR -->
-=======
-      <!-- END MENUBAR -->
+
 </div><!--end #base-->
 <!-- END BASE -->
->>>>>>> master

@@ -26,6 +26,20 @@
 								<textarea name="textarea1" id="deskripsi" class="form-control" rows="3" placeholder=""></textarea>
 								<label>Deskripsi</label>
 							</div>
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="form-group">
+										<input type="text" class="form-control" id="Firstname2">
+										<label for="Firstname2">Civitas</label>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<input type="text" class="form-control" id="Lastname2">
+										<label for="Lastname2">Jenjang</label>
+									</div>
+								</div>
+							</div>
 							<div>
 								<label class="radio-inline radio-styled">
 									<input type="radio" name="jenis_file"><span>Upload Link</span>
@@ -33,23 +47,26 @@
 								<label class="radio-inline radio-styled">
 									<input type="radio" name="jenis_file" checked><span>HardCopy</span>
 								</label>
-							</div>
-							<div class="form-group">
-								<input name="text" id="deskripsi" class="form-control" rows="3" placeholder=""></input>
-								<label>Instansi yang Bertanggung Jawab</label>
-							</div>
-						</div><!--end .card-body -->
-						<div class="card-actionbar">
-							<div class="card-actionbar-row">
-								<button type="submit" class="btn btn-primary ink-reaction">Submit</button>
+								<label class="radio-inline radio-styled">
+									<input type="radio" name="jenis_file" checked><span>Checked By Admin</span>
+								</label>
 							</div>
 						</div>
-					</div><!--end .card -->
-					<br>
-				</form>
-		</div>
+						
+									<div class="card-actionbar">
+					<div class="card-actionbar-row">
+						<button type="submit" class="btn btn-primary ink-reaction">Submit</button>
+					</div>
+				</div>
+						<br>
+					</div>
+				</div><!--end .card-body -->
+			</div><!--end .card -->
+			<br>
+		</form>
+	</div>
 
-				<div class="col-md-2"></div>
+	<div class="col-md-2"></div>
 
-			</div><!--end #content-->
+</div><!--end #content-->
 		<!-- END CONTENT -->

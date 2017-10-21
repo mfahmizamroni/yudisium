@@ -17,6 +17,7 @@
 <script src="<?php echo base_url(); ?>assets/js/core/source/AppNavSearch.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/core/source/AppVendor.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/core/demo/Demo.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/libs/dropzone/dropzone.min.js"></script>
 <?php if ($this->session->flashdata('success')) { ?>
 <script>
 	$(document).ready( function (e) {

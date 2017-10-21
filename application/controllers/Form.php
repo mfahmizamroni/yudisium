@@ -24,9 +24,9 @@ class Form extends CI_Controller {
 		$this->load->library('session');
 		if ($this->session->has_userdata('username')) {
 			$this->load->helper('url');
-			$this->load->view('master/Instansi/header');
+			$this->load->view('master/Civitas/header');
 			$this->load->view('pages/form');
-			$this->load->view('master/Instansi/navigation');
+			$this->load->view('master/Civitas/navigation');
 			$this->load->view('master/allJs');
 			$this->load->view('master/footer');
 		} else {
@@ -52,11 +52,11 @@ class Form extends CI_Controller {
 			$this->load->library('session');
 			if ($this->session->has_userdata('username')) {
 				$this->load->helper('url');
-				$this->load->view('master/Instansi/header');
-				$this->load->view('pages/Instansi/daftarMahasiswa', $data);
-				$this->load->view('master/Instansi/navigation');
+				$this->load->view('master/Civitas/header');
+				$this->load->view('pages/Civitas/daftarMahasiswa', $data);
+				$this->load->view('master/Civitas/navigation');
 				$this->load->view('master/tableJs');
-				$this->load->view('pages/Instansi/searchJs');
+				$this->load->view('master/searchJs');
 				$this->load->view('master/footer');
 			} else {
 				$this->load->helper('url');
@@ -95,11 +95,11 @@ class Form extends CI_Controller {
 				$this->load->library('session');
 				if ($this->session->has_userdata('username')) {
 					$this->load->helper('url');
-					$this->load->view('master/Instansi/header');
-					$this->load->view('pages/Instansi/daftarMahasiswa', $data);
-					$this->load->view('master/Instansi/navigation');
+					$this->load->view('master/Civitas/header');
+					$this->load->view('pages/Civitas/daftarMahasiswa', $data);
+					$this->load->view('master/Civitas/navigation');
 					$this->load->view('master/tableJs');
-					$this->load->view('pages/Instansi/searchJs');
+					$this->load->view('master/searchJs');
 					$this->load->view('master/footer');
 				} else {
 					$this->load->helper('url');
@@ -124,9 +124,9 @@ class Form extends CI_Controller {
 
 		if ($this->form_validation->run() === false) {
 			$this->load->helper('url');
-			$this->load->view('master/Instansi/header');
-			$this->load->view('pages/Instansi/detailMahasiswa', $data);
-			$this->load->view('master/Instansi/navigation');
+			$this->load->view('master/Civitas/header');
+			$this->load->view('pages/Civitas/detailMahasiswa', $data);
+			$this->load->view('master/Civitas/navigation');
 			$this->load->view('master/formJs');
 			$this->load->view('master/footer');
 		} else {
@@ -150,9 +150,9 @@ class Form extends CI_Controller {
 				$this->load->library('session');
 				if ($this->session->has_userdata('username')) {
 					// $this->load->helper('url');
-					// $this->load->view('master/Instansi/header');
-					// $this->load->view('pages/Instansi/detailMahasiswa', $data);
-					// $this->load->view('master/Instansi/navigation');
+					// $this->load->view('master/Civitas/header');
+					// $this->load->view('pages/Civitas/detailMahasiswa', $data);
+					// $this->load->view('master/Civitas/navigation');
 					// $this->load->view('master/formJs');
 					// $this->load->view('master/footer');
 					$this->load->helper('url');
@@ -171,9 +171,9 @@ class Form extends CI_Controller {
 				$this->load->library('session');
 				if ($this->session->has_userdata('username')) {
 					$this->load->helper('url');
-					$this->load->view('master/Instansi/header');
-					$this->load->view('pages/Instansi/detailMahasiswa', $data);
-					$this->load->view('master/Instansi/navigation');
+					$this->load->view('master/Civitas/header');
+					$this->load->view('pages/Civitas/detailMahasiswa', $data);
+					$this->load->view('master/Civitas/navigation');
 					$this->load->view('master/formJs');
 					$this->load->view('master/footer');
 				} else {
@@ -199,9 +199,9 @@ class Form extends CI_Controller {
 
 		if ($this->form_validation->run() === false) {
 			$this->load->helper('url');
-			$this->load->view('master/Instansi/header');
-			$this->load->view('pages/Instansi/addCatatan', $data);
-			$this->load->view('master/Instansi/navigation');
+			$this->load->view('master/Civitas/header');
+			$this->load->view('pages/Civitas/addCatatan', $data);
+			$this->load->view('master/Civitas/navigation');
 			$this->load->view('master/formJs');
 			$this->load->view('master/footer');
 		} else {
@@ -228,9 +228,9 @@ class Form extends CI_Controller {
 				$this->load->library('session');
 				if ($this->session->has_userdata('username')) {
 					$this->load->helper('url');
-					$this->load->view('master/Instansi/header');
-					$this->load->view('pages/Instansi/addCatatan', $data);
-					$this->load->view('master/Instansi/navigation');
+					$this->load->view('master/Civitas/header');
+					$this->load->view('pages/Civitas/addCatatan', $data);
+					$this->load->view('master/Civitas/navigation');
 					$this->load->view('master/formJs');
 					$this->load->view('master/footer');
 				} else {

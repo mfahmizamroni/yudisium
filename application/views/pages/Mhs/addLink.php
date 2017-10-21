@@ -42,6 +42,7 @@
 										<th>Syarat Yudisium</th>
 										<th>Deskripsi</th>
 										<th>Bukti</th>
+										<th>Status</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -52,7 +53,14 @@
 										<input type="hidden" name="syarat[]" value="<?= $syarats->syarat_id ?>">
 										<td><?= $syarats->syarat_nama ?></td>
 										<td><?= $syarats->syarat_deskripsi ?></td>
-										<td><input type="text" class="form-control" name="bukti[]" value="<?= $syarats->jms_bukti ?>"></td>
+										<td><input type="text" class="form-control" name="bukti[]" value="<?= $syarats->jms_bukti ?>" <?php if ($syarats->jms_status == 1) {echo "readonly";}?>></td>
+										<td>
+											<div class="checkbox checkbox-styled" >
+												<label>
+													<input type="checkbox" value="1" <?php if ($syarats->jms_status == 1) {echo "checked";} ?> disabled>
+												</label>
+											</div>
+										</td>
 									</tr>
 									<?php $a++; } ?>
 								</tbody>
@@ -60,7 +68,7 @@
 							<br>
 							<div class="card-actionbar">
 								<div class="card-actionbar-row style-default-bright">
-									<button class="btn ink-reaction btn-default" type="submit">Submit</button>
+									<button class="btn ink-reaction btn-primary" type="submit">Submit</button>
 								</div>
 
 							</div>

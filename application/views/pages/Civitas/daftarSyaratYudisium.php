@@ -56,6 +56,9 @@
 											<td>
 												<a href="<?= base_url().'syarat/editSyaratYudisium/'.$syarats->syarat_id ?>"><button class="btn ink-reaction btn-primary btn-xs"><i class="fa fa-fw fa-pencil"></i></button></a>
 												<a href="<?= base_url().'syarat/deleteSyaratYudisium/'.$syarats->syarat_id ?>"><button class="btn ink-reaction btn-danger btn-xs"><i class="fa fa-fw fa-trash"></i></button></a>
+												<?php if ($syarats->syarat_jenis == "checked by admin") {?>
+													<a href="<?= base_url().'syarat/uploadDataYudisium/'.$syarats->syarat_id ?>"><button class="btn ink-reaction btn-primary btn-xs">Upload file</button></a>
+												 <?php } ?>
 											</td>
 										</tr>
 										<?php $a++; } ?>

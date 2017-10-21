@@ -32,9 +32,9 @@ class Syarat extends CI_Controller {
 		$data = array('syarat'=>$syarat);
 
 		$this->load->helper('url');
-		$this->load->view('master/Instansi/header');
-		$this->load->view('pages/Instansi/daftarSyaratYudisium', $data);
-		$this->load->view('master/Instansi/navigation');
+		$this->load->view('master/Civitas/header');
+		$this->load->view('pages/Civitas/daftarSyaratYudisium', $data);
+		$this->load->view('master/Civitas/navigation');
 		$this->load->view('master/tableJs');
 		$this->load->view('master/footer');
 	}
@@ -56,9 +56,9 @@ class Syarat extends CI_Controller {
 			$this->load->library('session');
 			if ($this->session->has_userdata('username')) {
 				$this->load->helper('url');
-				$this->load->view('master/Instansi/header');
-				$this->load->view('pages/Instansi/addSyaratYudisium', $data);
-				$this->load->view('master/Instansi/navigation');
+				$this->load->view('master/Civitas/header');
+				$this->load->view('pages/Civitas/addSyaratYudisium', $data);
+				$this->load->view('master/Civitas/navigation');
 				$this->load->view('master/formJs');
 				$this->load->view('master/footer');
 			} else {
@@ -101,9 +101,9 @@ class Syarat extends CI_Controller {
 				$this->load->library('session');
 				if ($this->session->has_userdata('username')) {
 					$this->load->helper('url');
-					$this->load->view('master/Instansi/header');
-					$this->load->view('pages/Instansi/addSyaratYudisium', $data);
-					$this->load->view('master/Instansi/navigation');
+					$this->load->view('master/Civitas/header');
+					$this->load->view('pages/Civitas/addSyaratYudisium', $data);
+					$this->load->view('master/Civitas/navigation');
 					$this->load->view('master/formJs');
 					$this->load->view('master/footer');
 				} else {
@@ -134,9 +134,9 @@ class Syarat extends CI_Controller {
 			$this->load->library('session');
 			if ($this->session->has_userdata('username')) {
 				$this->load->helper('url');
-				$this->load->view('master/Instansi/header');
-				$this->load->view('pages/Instansi/editSyaratYudisium', $data);
-				$this->load->view('master/Instansi/navigation');
+				$this->load->view('master/Civitas/header');
+				$this->load->view('pages/Civitas/editSyaratYudisium', $data);
+				$this->load->view('master/Civitas/navigation');
 				$this->load->view('master/formJs');
 				$this->load->view('master/footer');
 			} else {
@@ -172,9 +172,9 @@ class Syarat extends CI_Controller {
 				$this->load->library('session');
 				if ($this->session->has_userdata('username')) {
 					$this->load->helper('url');
-					$this->load->view('master/Instansi/header');
-					$this->load->view('pages/Instansi/editSyaratYudisium', $data);
-					$this->load->view('master/Instansi/navigation');
+					$this->load->view('master/Civitas/header');
+					$this->load->view('pages/Civitas/editSyaratYudisium', $data);
+					$this->load->view('master/Civitas/navigation');
 					$this->load->view('master/formJs');
 					$this->load->view('master/footer');
 				} else {
@@ -201,5 +201,15 @@ class Syarat extends CI_Controller {
 			$this->load->helper('url');
 			header('location:'.base_url().'user/login');
 		}
+	}
+
+	public function uploadDataYudisium()
+	{
+		$this->load->helper('url');
+		$this->load->view('master/Civitas/header');
+		$this->load->view('pages/Civitas/uploadData');
+		$this->load->view('master/Civitas/navigation');
+		$this->load->view('master/tableJs');
+		$this->load->view('master/footer');
 	}
 }
