@@ -29,11 +29,26 @@ class Mhs_model extends CI_Model {
 		return $this->db->get()->row();
 	}
 
+	public function get_mhs_jmc($id)
+	{
+		$this->db->from('mhs');
+		$this->db->join('junc_mhs_civitas', 'mhs_id = jmc_mhs_id', 'LEFT');
+		$this->db->where('mhs_id', $id);
+		return $this->db->get()->result();
+	}
+
 	public function get_mhs_per_civitas($civitas_id)
 	{
 		$this->db->from('mhs');
 		$this->db->join('junc_mhs_civitas', 'mhs_id = jmc_mhs_id');
 		$this->db->join('civitas', 'civitas_id = jmc_civitas_id');
+		return $this->db->get()->result();
+	}
+
+	public function get_mhs_per_departemen($departemen_id)
+	{
+		$this->db->from('mhs');
+		$this->db->join('departemen', 'mhs_departemen_id = departemen_id');
 		return $this->db->get()->result();
 	}
 
@@ -70,6 +85,19 @@ class Mhs_model extends CI_Model {
 		return $this->db->get()->result();
 	}
 
+	public function get_mhs_per_departemen_with_syarat($departemen_id)
+	{
+		$this->db->select(array('*','MIN(jms_status) as minstat'));
+		$this->db->from('mhs');
+		$this->db->join('junc_mhs_civitas', 'mhs_id = jmc_mhs_id');
+		$this->db->join('departemen', 'departemen_id = mhs_departemen_id');
+		// $this->db->join('syarat', 'civitas_id = syarat_civitas_id');
+		$this->db->join('junc_mhs_syarat', 'jms_mhs_id = mhs_id');
+		$this->db->where('departemen_id', $departemen_id);
+		$this->db->group_by('mhs_id');
+		return $this->db->get()->result();
+	}
+
 	/**
 	 * create_user function.
 	 * 
@@ -79,13 +107,17 @@ class Mhs_model extends CI_Model {
 	 * @param mixed $password
 	 * @return bool true on success, false on failure
 	 */
-	public function create_mhs($nama, $nrp, $password, $jenjang) {
+	public function create_mhs($password, $gender, $nama, $nrp, $tanggal, $notelp, $lamastudi, $mhs_jenjang) {
 		
 		$data = array(
+			'mhs_password'   	=> $this->hash_password($password),
+			'mhs_gender'   		=> $gender,
 			'mhs_nama'   		=> $nama,
 			'mhs_nrp'      		=> $nrp,
-			'mhs_password'   	=> $this->hash_password($password),
 			'mhs_jenjang'   	=> $jenjang,
+			'mhs_tgllahir'   	=> $tanggal,
+			'mhs_notelp'   		=> $notelp,
+			'mhs_lamastudi'   	=> $lamastudi,
 			'created_at' 		=> date('Y-m-j H:i:s'),
 		);
 		
@@ -93,13 +125,34 @@ class Mhs_model extends CI_Model {
 		
 	}
 
-	public function update_mhs($id, $nama, $nrp, $password, $jenjang) {
+	public function update_mhs($id, $password, $gender, $nama, $tanggal, $notelp, $lamastudi, $jenjang) {
 		
 		$data = array(
+			'mhs_password'   	=> $this->hash_password($password),
+			'mhs_gender'   		=> $gender,
 			'mhs_nama'   		=> $nama,
-			'mhs_nrp'      		=> $nrp,
-			'mhs_password' 		=> $this->hash_password($password),
-			'mhs_jenjang' 		=> $jenjang,
+			'mhs_jenjang'   	=> $jenjang,
+			'mhs_tgllahir'   	=> $tanggal,
+			'mhs_notelp'   		=> $notelp,
+			'mhs_lamastudi'   	=> $lamastudi,
+			'updated_at' 		=> date('Y-m-j H:i:s'),
+		);
+		
+		$this->db->where('mhs_id', $id);
+		$this->db->update('mhs', $data);
+		return $id;
+		
+	}
+
+	public function update_mhs_np($id, $gender, $nama, $tanggal, $notelp, $lamastudi, $jenjang) {
+		
+		$data = array(
+			'mhs_gender'   		=> $gender,
+			'mhs_nama'   		=> $nama,
+			'mhs_jenjang'   	=> $jenjang,
+			'mhs_tgllahir'   	=> $tanggal,
+			'mhs_notelp'   		=> $notelp,
+			'mhs_lamastudi'   	=> $lamastudi,
 			'updated_at' 		=> date('Y-m-j H:i:s'),
 		);
 		

@@ -69,15 +69,16 @@ class Syarat extends CI_Controller {
 			$syarat = $this->input->post('syarat');
 			$deskripsi = $this->input->post('deskripsi');
 			$jenis = $this->input->post('jenis');
+			$jenjang = $this->input->post('jenjang');
 			$civitas = $this->session->userdata('civitas_id');
 
-			$insert_id = $this->syarat_model->create_syarat($syarat, $deskripsi, $jenis, $civitas);
+			$insert_id = $this->syarat_model->create_syarat($syarat, $deskripsi, $jenis, $civitas, $jenjang);
 
 			if ($insert_id) {
 
 				$mhs_per_civitas = $this->mhs_model->get_mhs_per_civitas($civitas);
 				foreach ($mhs_per_civitas as $mhs) {
-					$this->syarat_model->create_jms($mhs->mhs_id, $insert_id);
+					$this->syarat_model->create_jms($mhs->mhs_id, $insert_id, $civitas);
 				}
 
 				$success = "creation success";
@@ -147,9 +148,10 @@ class Syarat extends CI_Controller {
 			$syarat = $this->input->post('syarat');
 			$deskripsi = $this->input->post('deskripsi');
 			$jenis = $this->input->post('jenis');
+			$jenjang = $this->input->post('jenjang');
 			$civitas = $this->session->userdata('civitas_id');
 
-			if ($this->syarat_model->update_syarat($id, $syarat, $deskripsi, $jenis, $civitas)) {
+			if ($this->syarat_model->update_syarat($id, $syarat, $deskripsi, $jenis, $civitas, $jenjang)) {
 
 				$success = "update success";
 				$data = array('success' => $success );
@@ -188,8 +190,8 @@ class Syarat extends CI_Controller {
 	public function deleteSyaratYudisium($syarat_id)
 	{
 	    $data = new stdClass();
-    	$this->syarat_model->delete_syarat($syarat_id);
     	$this->syarat_model->delete_jms($syarat_id);
+    	$this->syarat_model->delete_syarat($syarat_id);
     	$success = "Delete success";
 		$data = array('success' => $success );
 

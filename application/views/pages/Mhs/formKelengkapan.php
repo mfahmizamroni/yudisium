@@ -21,7 +21,7 @@
 				<!-- begin identitas -->
 				<div class="row">
 					<div class="col-lg-12">
-						<h1 class="text-primary"><?= $this->session->userdata('nama') ?></h1>
+						<h1 class="text-primary"><?= $this->session->userdata('name') ?></h1>
 					</div><!--end .col -->
 				</div><!--end .row -->
 				<br>
@@ -39,6 +39,7 @@
 									<tr>
 										<th>No.</th>
 										<th>Syarat Yudisium</th>
+										<th>Nama Civitas</th>
 										<th>Status</th>
 										<th>Keterangan</th>
 										<th>#</th>
@@ -50,6 +51,7 @@
 									<tr>
 										<td><?= $a ?></td>
 										<td><?= $civitass->civitas_form_bebas ?></td>
+										<td><?= $civitass->civitas_nama ?></td>
 										<?php if ($civitass->minstat == 0) { ?>
 										<td><a class="btn btn-xs ink-reaction btn-danger disabled">Not Approved</a></td>
 										<?php } else { ?>

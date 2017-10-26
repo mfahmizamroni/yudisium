@@ -76,13 +76,13 @@
                 <a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">
                   <i class="fa fa-circle text-primary text-lg"></i>
                   <span class="profile-info">
-                    <?= $this->session->userdata('nama') ?>
+                    <?= $this->session->userdata('name') ?>
                     <small><?= $this->session->userdata('nrp') ?></small>
                   </span>
                 </a>
                 <ul class="dropdown-menu animation-dock">
                   <li class="dropdown-header">Config</li>
-                  <li><a href=""><i class="fa fa-fw fa-user"></i>My profile</a></li>
+                  <li><a href="<?= base_url()."mhs/editprofile" ?>"><i class="fa fa-fw fa-user"></i>My profile</a></li>
                   <hr>
                   <li><a href="<?= base_url()."mhs/logout" ?>"><i class="fa fa-fw fa-power-off text-danger"></i> Logout</a></li>
                 </ul><!--end .dropdown-menu -->

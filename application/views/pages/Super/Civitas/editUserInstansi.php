@@ -11,7 +11,7 @@
 					</div><!--end .col -->
 				</div><!--end .row -->
 				<!-- BEGIN VERTICAL FORM FLOATING LABELS -->
-				<?= form_open('super/addUserCivitas', array('class' => "form floating-label" )) ?>
+				<?= form_open('super/editUserCivitas/'.$user->adm_id, array('class' => "form floating-label" )) ?>
 					<div class="card">
 						<div class="card-head style-primary">
 							<header>User - Civitas</header>
@@ -19,30 +19,30 @@
 
 						<div class="card-body floating-label">
 							<div class="form-group">
-								<input type="text" class="form-control" name="nama" value="<?= set_value('nama') ?>">
+								<input type="text" class="form-control" name="nama" value="<?= $user->adm_nama ?>">
 								<label for="Username2">Nama Lengkap</label>
 							</div>
 							<div class="form-group">
-								<input type="email" class="form-control" name="email" value="<?= set_value('email') ?>">
+								<input type="email" class="form-control" name="email" value="<?= $user->adm_email ?>">
 								<label for="Password2">Email</label>
 							</div>
 							<div class="form-group">
-								<input type="text" class="form-control" name="username" value="<?= set_value('username') ?>">
+								<input type="text" class="form-control" name="username" value="<?= $user->adm_username ?>">
 								<label for="Username2">Username</label>
 							</div>
 							<div class="form-group">
-								<input type="password" class="form-control" name="password" value="<?= set_value('password') ?>">
+								<input type="password" class="form-control" name="password" value="11111">
 								<label for="Password2">Password</label>
 							</div>
 							<div class="form-group">
-								<input type="password" class="form-control" name="password_confirm" value="<?= set_value('password_confirm') ?>">
+								<input type="password" class="form-control" name="password_confirm" value="11111">
 								<label for="Password2">Password Confirm</label>
 							</div>
 							<div class="form-group">
 								<select id="select1" name="civitas" class="form-control">
 									<option value="">&nbsp;</option>
 									<?php foreach ($civitas as $civitass) { ?>
-									<option value="<?= $civitass->civitas_id ?>"><?= $civitass->civitas_nama ?></option>
+									<option value="<?= $civitass->civitas_id ?>" <?php if ($user->adm_civitas_id == $civitass->civitas_id) {echo "selected";} ?>><?= $civitass->civitas_nama ?></option>
 									<?php } ?>
 								</select>
 								<label for="select1">Nama Civitas</label>

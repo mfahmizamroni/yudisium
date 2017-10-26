@@ -44,8 +44,9 @@
 													<th>No.</th>
 													<th>NRP</th>
 													<th>Nama</th>
-													<th>Status</th>
-													<th>Catatan</th>
+													<th>Jenjang</th>
+													<!-- <th>Status</th> -->
+													<!-- <th>Catatan</th> -->
 													<th>Action</th>
 												</tr>
 											</thead>
@@ -58,12 +59,13 @@
 														<input type="hidden" name="mhs[]" value="<?= $mahasiswas->mhs_id ?>" disabled>
 														<td><?= $mahasiswas->mhs_nrp ?></td>
 														<td><?= $mahasiswas->mhs_nama ?></td>
-														<?php if ($mahasiswas->minstat == 0) { ?>
+														<td><?= $mahasiswas->mhs_jenjang ?></td>
+														<!-- <?php if ($mahasiswas->minstat == 0) { ?>
 															<td><a class="btn btn-xs ink-reaction btn-danger disabled">Not Approved</a></td>
 														<?php } else { ?>
 															<td><a class="btn btn-xs ink-reaction btn-success">Approved</a></td>
-														<?php } ?>
-														<td><?= $mahasiswas->jmc_catatan ?></td>
+														<?php } ?> -->
+														<!-- <td><?= $mahasiswas->jmc_catatan ?></td> -->
 														<td>
 															<a href="<?= base_url()."super/formKelengkapanMahasiswa/".$mahasiswas->mhs_id?>" class="btn btn-xs ink-reaction btn-primary">Details</a>
 														</td>
@@ -78,7 +80,7 @@
 						</div><!--end .card-body -->
 						<div class="card-actionbar">
 							<div class="card-actionbar-row">
-								<div class="input-group-btn">
+								<!-- <div class="input-group-btn">
 									<button type="button" class="btn btn-default" tabindex="-1">Action</button>
 									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" tabindex="-1">
 										<span class="caret"></span>
@@ -87,7 +89,7 @@
 										<li><a href=""><button type="submit" class="btn btn-primary" name="status" value="1">Approve</button></a></li>
 										<li><a href=""><button type="submit" class="btn btn-danger" name="status" value="0">Cancel Approval</button></a></li>
 									</ul>
-								</div>
+								</div> -->
 							</div>
 						</div>
 						</form>

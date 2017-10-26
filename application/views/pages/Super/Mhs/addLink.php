@@ -22,7 +22,7 @@
 				<!-- begin identitas -->
 				<div class="row">
 					<div class="col-lg-12">
-						<h1 class="text-primary"><?= $this->session->userdata('name') ?></h1>
+						<h1 class="text-primary"><?= $mahasiswa->mhs_nama ?></h1>
 					</div><!--end .col -->
 				</div><!--end .row -->
 				<br>

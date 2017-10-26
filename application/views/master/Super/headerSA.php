@@ -42,7 +42,7 @@
             <ul class="header-nav header-nav-options">
               <li class="header-nav-brand" >
                 <div class="brand-holder">
-                  <a href="<?php echo base_url();?>form/daftarMahasiswa">
+                  <a href="<?php echo base_url();?>super/">
                     <span class="text-lg text-bold text-primary">SIM Yudisium</span>
                   </a>
                 </div>
@@ -70,12 +70,12 @@
                 </a>
                 <ul class="dropdown-menu animation-dock">
                   <li>
-                    <a class="" href="#">
+                    <a class="" href="<?= base_url()."super/" ?>">
                       <span class="title">Daftar Mahasiswa</span>
                     </a>
                   </li>
                   <li>
-                    <a class="" href="#">
+                    <a class="" href="<?= base_url()."super/addMahasiswa/" ?>">
                       <span class="title">Tambah Mahasiswa</span>
                     </a>
                   </li>
@@ -88,59 +88,66 @@
                 </a>
                 <ul class="dropdown-menu animation-dock">
                   <li>
-                    <a class="" href="#">
+                    <a class="" href="<?= base_url()."super/daftarCivitas" ?>">
                       <span class="title">Daftar Civitas</span>
                     </a>
                   </li>
                   <li>
-                  <a class="" href="#">
-                    <span class="title">Daftar User Civitas</span>
-                  </a>
-                </li>
-              </ul><!--end .dropdown-menu -->
-            </li><!--end .dropdown -->
+                    <a class="" href="<?= base_url()."super/addCivitas" ?>">
+                      <span class="title">Tambah Civitas</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="" href="<?= base_url()."super/daftarUserCivitas" ?>">
+                      <span class="title">Daftar User Civitas</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="" href="<?= base_url()."super/addUserCivitas" ?>">
+                      <span class="title">Tambah User Civitas</span>
+                    </a>
+                  </li>
+                </ul><!--end .dropdown-menu -->
+              </li><!--end .dropdown -->
 
-            <li class="dropdown hidden-xs">
-              <a href="javascript:void(0);" class="btn btn-flat ink-reaction btn-primary" data-toggle="dropdown">
-                SYARAT YUDISIUM
-              </a>
-              <ul class="dropdown-menu animation-dock">
-                <li>
-                  <a class="" href="#">
-                    <span class="title">Daftar Syarat Yudisium</span>
-                  </a>
-                </li>
-                <li>
-                  <a class="" href="#">
-                    <span class="title">Tambah Syarat Yudisium</span>
-                  </a>
-                </li>
-              </ul><!--end .dropdown-menu -->
-            </li><!--end .dropdown -->
+              <li class="dropdown hidden-xs">
+                <a href="javascript:void(0);" class="btn btn-flat ink-reaction btn-primary" data-toggle="dropdown">
+                  SYARAT YUDISIUM
+                </a>
+                <ul class="dropdown-menu animation-dock">
+                  <li>
+                    <a class="" href="<?= base_url()."super/daftarSyaratYudisium" ?>">
+                      <span class="title">Daftar Syarat Yudisium</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="" href="<?= base_url()."super/addSyaratYudisium" ?>">
+                      <span class="title">Tambah Syarat Yudisium</span>
+                    </a>
+                  </li>
+                </ul><!--end .dropdown-menu -->
+              </li><!--end .dropdown -->
 
-          </ul>
+            </ul>
 
-          <!-- header nav profile -->
-          <ul class="header-nav header-nav-profile">
-            <li class="dropdown">
-              <a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">
-                <i class="fa fa-circle text-primary text-lg"></i>
-                <span class="profile-info">
-                  Super Admin
-                  <small>Information System</small>
-                </span>
-              </a>
-              <ul class="dropdown-menu animation-dock">
-                <li class="dropdown-header">Config</li>
-                <li><a href=""><i class="fa fa-fw fa-user"></i>My profile</a></li>
-                <hr>
-                <li><a href="<?= base_url()."user/logout" ?>"><i class="fa fa-fw fa-power-off text-danger"></i> Logout</a></li>
-              </ul><!--end .dropdown-menu -->
-            </li><!--end .dropdown -->
-          </ul><!--end .header-nav-profile -->
-
-
-
+            <!-- header nav profile -->
+            <ul class="header-nav header-nav-profile">
+              <li class="dropdown">
+                <a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">
+                  <i class="fa fa-circle text-primary text-lg"></i>
+                  <span class="profile-info">
+                    <?= $this->session->userdata('nama') ?>
+                    <small><?= $this->session->userdata('civitas_nama') ?></small>
+                  </span>
+                </a>
+                <ul class="dropdown-menu animation-dock">
+                  <li class="dropdown-header">Config</li>
+                  <li><a href=""><i class="fa fa-fw fa-user"></i>My profile</a></li>
+                  <hr>
+                  <li><a href="<?= base_url()."user/logout" ?>"><i class="fa fa-fw fa-power-off text-danger"></i> Logout</a></li>
+                </ul><!--end .dropdown-menu -->
+              </li><!--end .dropdown -->
+            </ul><!--end .header-nav-profile -->
 
         </div><!--end #header-navbar-collapse -->
       </div>

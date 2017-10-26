@@ -26,7 +26,7 @@ class Mhs extends CI_Controller {
 
 		$data = array('civitas'=>$civitas);
 
-		if ($this->session->has_userdata('nama')) {
+		if ($this->session->has_userdata('name')) {
 			$this->load->helper('url');
 			$this->load->view('master/Mhs/headerMhs');
 			$this->load->view('pages/Mhs/formKelengkapan',$data);
@@ -53,7 +53,7 @@ class Mhs extends CI_Controller {
 		$data = array('syarat'=>$syarat,'civitas'=>$civitas);
 
 		if ($this->form_validation->run() === false) {
-			if ($this->session->has_userdata('nama')) {
+			if ($this->session->has_userdata('name')) {
 				$this->load->helper('url');
 				$this->load->view('master/Mhs/headerMhs');
 				$this->load->view('pages/Mhs/addLink', $data);
@@ -80,7 +80,7 @@ class Mhs extends CI_Controller {
 				$data = array('success' => $success );
 
 				$this->load->library('session');
-				if ($this->session->has_userdata('nama')) {
+				if ($this->session->has_userdata('name')) {
 					$this->load->helper('url');
 					header('location:'.base_url().'mhs');
 					$this->session->set_flashdata('success', $success);
@@ -98,7 +98,7 @@ class Mhs extends CI_Controller {
 				$data->error = 'There was a problem Please try again.';
 
 				$this->load->library('session');
-				if ($this->session->has_userdata('nama')) {
+				if ($this->session->has_userdata('name')) {
 					$this->load->helper('url');
 					$this->load->view('master/Mhs/headerMhs');
 					$this->load->view('pages/Mhs/addLink', $data);
@@ -114,12 +114,141 @@ class Mhs extends CI_Controller {
 	}
 
 	public function editProfile(){
-		$this->load->helper('url');
-		$this->load->view('master/Mhs/headerMhs');
-		$this->load->view('pages/Mhs/editProfile');
-		$this->load->view('master/Mhs/navigationMhs');
-		$this->load->view('master/tableJs');
-		$this->load->view('master/footer');
+
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+
+		$data =  new stdClass();
+		$mahasiswa = $this->mhs_model->get_mhs_jmc($this->session->userdata('id'));
+		$dosen = $this->civitas_model->get_civitas_dosen($this->session->userdata('departemen_id'));
+		$lab = $this->civitas_model->get_civitas_lab($this->session->userdata('departemen_id'));
+
+		$data = array('mahasiswa'=>$mahasiswa,'dosen'=>$dosen,'lab'=>$lab);
+
+		if($this->input->post('password') != "11111") {
+		   $required =  '|min_length[6]|required';
+		} else {
+		   $required =  '';
+		}
+
+		$this->form_validation->set_rules('password', 'Password', 'trim'.$required);
+		$this->form_validation->set_rules('password_confirm', 'Confirm Password', 'trim|matches[password]'.$required);
+		$this->form_validation->set_rules('gender', 'Jenis Kelamin', 'required');
+		$this->form_validation->set_rules('nama', 'Nama Lengkap', 'required');
+		$this->form_validation->set_rules('dosen', 'Dosen Pembimbing', 'required');
+		$this->form_validation->set_rules('lab', 'Laboratorium', 'required');
+		$this->form_validation->set_rules('tanggal', 'Tanggal Lahir', 'required');
+		$this->form_validation->set_rules('notelp', 'Nomor Telepon', 'required');
+		$this->form_validation->set_rules('lamastudi', 'Lama Studi', 'required');
+
+		if ($this->form_validation->run() === false) {
+			$this->load->helper('url');
+			$this->load->view('master/Mhs/headerMhs');
+			$this->load->view('pages/Mhs/editProfile', $data);
+			$this->load->view('master/Mhs/navigationMhs');
+			$this->load->view('master/formJs');
+			$this->load->view('master/footer');
+		} else {
+			$password = $this->input->post('password');
+			$gender = $this->input->post('gender');
+			$nama = $this->input->post('nama');
+			$dosen = $this->input->post('dosen');
+			$lab = $this->input->post('lab');
+			$tanggal = $this->input->post('tanggal');
+			$notelp = $this->input->post('notelp');
+			$lamastudi = $this->input->post('lamastudi');
+			$id = $this->session->userdata('id');
+			$jenjang = $this->session->userdata('jenjang');
+
+			$ruang_baca = $this->civitas_model->get_civitas_ruangbaca($this->session->userdata('departemen_id'));
+			$check_jmc = $this->civitas_model->get_jmc_per_mhs($id);
+			$check_jms = $this->syarat_model->get_jms_per_mhs($id);
+
+			if ($adm_password = "11111") {
+				$update = $this->mhs_model->update_mhs_np($id, $gender, $nama, $tanggal, $notelp, $lamastudi, $jenjang);
+				if (count($check_jmc) > 0) {
+					$this->civitas_model->update_jmc($check_jmc[0]->jmc_mhs_id, $check_jmc[0]->jmc_civitas_id, $id, $dosen);
+					$this->civitas_model->update_jmc($check_jmc[1]->jmc_mhs_id, $check_jmc[1]->jmc_civitas_id, $id, $lab);
+					$this->civitas_model->update_jmc($check_jmc[2]->jmc_mhs_id, $check_jmc[2]->jmc_civitas_id, $id, $ruang_baca->civitas_id);
+				} else {
+					$jmc1 = $this->civitas_model->create_jmc($id, $dosen);
+					$jmc2 = $this->civitas_model->create_jmc($id, $lab);
+					$jmc3 = $this->civitas_model->create_jmc($id, $ruang_baca->civitas_id);
+				}
+			} else {
+				$update = $this->mhs_model->update_mhs($id, $password, $gender, $nama, $tanggal, $notelp, $lamastudi, $jenjang);
+				if ($check_jmc) {
+					$jmc1 = $this->civitas_model->update_jmc($check_jmc[0]->jmc_mhs_id, $check_jmc[0]->jmc_civitas_id, $id, $dosen);
+					$jmc2 = $this->civitas_model->update_jmc($check_jmc[1]->jmc_mhs_id, $check_jmc[1]->jmc_civitas_id, $id, $lab);
+					$jmc3 = $this->civitas_model->update_jmc($check_jmc[2]->jmc_mhs_id, $check_jmc[2]->jmc_civitas_id, $id, $ruang_baca->civitas_id);
+				} else {
+					$jmc1 = $this->civitas_model->create_jmc($id, $dosen);
+					$jmc2 = $this->civitas_model->create_jmc($id, $lab);
+					$jmc3 = $this->civitas_model->create_jmc($id, $ruang_baca->civitas_id);
+				}
+			}
+
+			if (count($check_jms) > 0) {
+				$syaratdosen = $this->syarat_model->get_syarat_per_civitas($dosen);
+				$a = 0;
+				for ($i=0; $i < count($syaratdosen); $i++) { 
+					$this->syarat_model->update_jms($check_jms[$i]->jms_mhs_id, $check_jms[$i]->jms_syarat_id, $id, $syaratdosen[$i]->syarat_id);
+					$a++;
+				}
+				$syaratlab = $this->syarat_model->get_syarat_per_civitas($lab);
+				for ($i=$a; $i < count($syaratlab)+$a; $i++) { 
+					$this->syarat_model->update_jms($check_jms[$i]->jms_mhs_id, $check_jms[$i]->jms_syarat_id, $id, $syaratlab[$i]->syarat_id);
+				}
+			} else {
+				$syaratdosen = $this->syarat_model->get_syarat_per_civitas($dosen);
+				$a = 0;
+				for ($i=0; $i < count($syaratdosen); $i++) { 
+					$this->syarat_model->create_jms($id, $syaratdosen[$i]->syarat_id, $dosen);
+					$a++;
+				}
+				$syaratlab = $this->syarat_model->get_syarat_per_civitas($lab);
+				for ($i=$a; $i < count($syaratlab)+$a; $i++) { 
+					$this->syarat_model->create_jms($id, $syaratlab[$i]->syarat_id, $lab);
+				}
+				$syaratruangbaca = $this->syarat_model->get_syarat_per_civitas($ruang_baca->civitas_id);
+				for ($i=$a; $i < count($syaratruangbaca)+$a; $i++) { 
+					$this->syarat_model->create_jms($id, $syaratruangbaca[$i]->syarat_id, $ruang_baca->civitas_id);
+				}
+			}
+
+			if ($update) {
+				$success = "Profile Updated";
+				$data = array('success' => $success);
+
+				$this->load->library('session');
+				if ($this->session->has_userdata('name')) {
+					$this->load->helper('url');
+					header('location:'.base_url().'mhs');
+					$this->session->set_flashdata('success', $success);
+				} else {
+					$this->load->helper('url');
+					header('location:'.base_url().'user/login');
+				}
+
+			} else {
+
+        		// user creation failed, this should never happen
+				$data->error = 'There was a problem Please try again.';
+
+				$this->load->library('session');
+				if ($this->session->has_userdata('name')) {
+					$this->load->helper('url');
+					$this->load->view('master/Mhs/headerMhs');
+					$this->load->view('pages/Mhs/editProfile', $data);
+					$this->load->view('master/Mhs/navigationMhs');
+					$this->load->view('master/formJs');
+					$this->load->view('master/footer');
+				} else {
+					$this->load->helper('url');
+					header('location:'.base_url().'user/login');
+				}
+			}
+		}
 	}
 
 	public function login()
@@ -137,7 +266,7 @@ class Mhs extends CI_Controller {
 		
 		if ($this->form_validation->run() == false) {
 			
-			if ($this->session->has_userdata('nama')) {
+			if ($this->session->has_userdata('name')) {
 				$this->load->helper('url');
 				header('location:'.base_url().'mhs');
 			} else {
@@ -161,9 +290,10 @@ class Mhs extends CI_Controller {
 				
 				$newdata = array(
 					'id' 	 		=> (string)$mhs->mhs_id,
-					'nama' 	 		=> (string)$mhs->mhs_nama,
+					'name' 	 		=> (string)$mhs->mhs_nama,
 					'nrp'			=> (string)$mhs->mhs_nrp,
 					'jenjang'		=> (string)$mhs->mhs_jenjang,
+					'departemen_id'	=> (string)$departemen->departemen_id,
 					'departemen'	=> (string)$departemen->departemen_nama,
 					'logged_in' 	=> TRUE
 					);

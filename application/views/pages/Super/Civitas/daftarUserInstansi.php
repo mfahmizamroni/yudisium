@@ -30,20 +30,25 @@
 								<thead>
 									<tr>
 										<th>No.</th>
+										<th>Nama</th>
+										<th>Username</th>
+										<th>Email</th>
 										<th>Civitas</th>
 										<th>#</th>
 									</tr>
 								</thead>
 								<tbody>
 									<?php $a = 1;
-									foreach ($civitas as $civitass) { ?>
+									foreach ($user as $users) { ?>
 									<tr>
 										<td><?= $a ?></td>
-										<td><?= $civitass->civitas_nama ?></td>
+										<td><?= $users->adm_nama ?></td>
+										<td><?= $users->adm_username ?></td>
+										<td><?= $users->adm_email ?></td>
+										<td><?= $users->civitas_nama ?></td>
 										<td>
-											<a href="<?= base_url()."super/detailCivitas/".$civitass->civitas_id ?>"><button class="btn btn-primary btn-xs ink-reaction">Details</button></a>
-											<a href="<?= base_url().'super/editCivitas/'.$civitass->civitas_id ?>"><button class="btn ink-reaction btn-primary btn-xs"><i class="fa fa-fw fa-pencil"></i></button></a>
-											<a href="<?= base_url().'super/deleteCivitas/'.$civitass->civitas_id ?>"><button class="btn ink-reaction btn-danger btn-xs"><i class="fa fa-fw fa-trash"></i></button></a>		
+											<a href="<?= base_url().'super/editUserCivitas/'.$users->adm_id ?>"><button class="btn ink-reaction btn-primary btn-xs"><i class="fa fa-fw fa-pencil"></i></button></a>
+											<a href="<?= base_url().'super/deleteUserCivitas/'.$users->adm_id ?>"><button class="btn ink-reaction btn-danger btn-xs"><i class="fa fa-fw fa-trash"></i></button></a>	
 										</td>
 									</tr>
 									<?php $a++; } ?>

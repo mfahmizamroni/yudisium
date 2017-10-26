@@ -12,24 +12,25 @@
 					</div><!--end .col -->
 				</div><!--end .row -->
 				<!-- BEGIN VERTICAL FORM FLOATING LABELS -->
-				<form class="form">
+				<?= form_open('super/addCivitas', array('class' => "form floating-label" )) ?>
 					<div class="card">
 						<div class="card-head style-primary">
 							<header>Instansi</header>
 						</div>
 
 						<div class="card-body floating-label">
-														<div class="form-group">
-								<input type="text" class="form-control" id="Username2">
-								<label for="Username2">Nama Instansi</label>
+							<div class="form-group">
+								<input type="text" class="form-control" name="nama" value="<?= set_value('nama') ?>">
+								<label>Nama Instansi</label>
 							</div>
 							<div class="form-group">
-								<input type="text" class="form-control" id="Password2">
-								<label for="Password2">Tipe Instansi</label>
-							</div>
-							<div class="form-group">
-								<input type="text" class="form-control" id="Password2">
-								<label for="Password2">Keterangan</label>
+								<select id="select1" name="tipe" class="form-control">
+									<option value="">&nbsp;</option>
+									<option value="Ruang Baca">Ruang Baca</option>
+									<option value="Laboratorium">Laboratorium</option>
+									<option value="Dosen Pembimbing">Dosen Pembimbing</option>
+								</select>
+								<label>Tipe Instansi</label>
 							</div>
 							<br>
 

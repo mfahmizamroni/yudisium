@@ -26,6 +26,14 @@
 								<textarea id="deskripsi" class="form-control" rows="3" placeholder="" name="deskripsi"><?= $syarat->syarat_deskripsi ?></textarea>
 								<label>Deskripsi</label>
 							</div>
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="form-group">
+										<input type="text" class="form-control" id="Lastname2" name="jenjang" value="<?= $syarat->syarat_jenjang ?>">
+										<label for="Lastname2">Jenjang</label>
+									</div>
+								</div>
+							</div>
 							<div>
 								<label class="radio-inline radio-styled">
 									<input type="radio" name="jenis" value="upload link" <?php if ($syarat->syarat_jenis == "upload link") { echo "checked";} ?> ><span>Upload Link</span>

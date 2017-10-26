@@ -31,6 +31,14 @@ class User_model extends CI_Model {
 		return $count;
 		
 	}
+
+	public function get_user_per_departemen($departemen_id)
+	{
+		$this->db->from('adm');
+		$this->db->join('civitas', 'adm_civitas_id = civitas_id');
+		$this->db->where('civitas_departemen_id', $departemen_id);
+		return $this->db->get()->result();
+	}
 	
 	/**
 	 * create_user function.
@@ -41,9 +49,10 @@ class User_model extends CI_Model {
 	 * @param mixed $password
 	 * @return bool true on success, false on failure
 	 */
-	public function create_user($username, $email, $password, $civitas, $role) {
+	public function create_user($nama, $username, $email, $password, $civitas, $role) {
 		
 		$data = array(
+			'adm_nama'   			=> $nama,
 			'adm_username'   		=> $username,
 			'adm_email'      		=> $email,
 			'adm_civitas_id'   		=> $civitas,
@@ -56,15 +65,33 @@ class User_model extends CI_Model {
 		
 	}
 
-	public function update_user($id, $username, $email, $password, $civitas, $role) {
+	public function update_user_np($id, $nama, $username, $email, $civitas, $role) {
 		
 		$data = array(
+			'adm_nama'   			=> $nama,
+			'adm_username'   		=> $username,
+			'adm_email'      		=> $email,
+			'adm_civitas_id'   		=> $civitas,
+			'adm_role'      		=> $role,
+			'updated_at'			=> date('Y-m-j H:i:s'),
+		);
+		
+		$this->db->where('adm_id', $id);
+		$this->db->update('adm', $data);
+		return $username;
+		
+	}
+
+	public function update_user($id, $nama, $username, $email, $password, $civitas, $role) {
+		
+		$data = array(
+			'adm_nama'   			=> $nama,
 			'adm_username'   		=> $username,
 			'adm_email'      		=> $email,
 			'adm_civitas_id'   		=> $civitas,
 			'adm_role'      		=> $role,
 			'adm_password'   		=> $this->hash_password($password),
-			'updated_at' => date('Y-m-j H:i:s'),
+			'updated_at'			=> date('Y-m-j H:i:s'),
 		);
 		
 		$this->db->where('adm_id', $id);
@@ -126,6 +153,14 @@ class User_model extends CI_Model {
 	public function delete_user($user_id) {
 		
 		$this->db->where('adm_id', $user_id);
+		$this->db->delete('adm');
+		return $user_id;
+		
+	}
+
+	public function delete_user_per_civitas($civitas_id) {
+		
+		$this->db->where('adm_civitas_id', $civitas_id);
 		$this->db->delete('adm');
 		return $user_id;
 		

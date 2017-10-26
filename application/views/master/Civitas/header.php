@@ -94,7 +94,7 @@
                 <a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">
                   <i class="fa fa-circle text-primary text-lg"></i>
                   <span class="profile-info">
-                    <?= $this->session->userdata('username') ?>
+                    <?= $this->session->userdata('nama') ?>
                     <small><?= $this->session->userdata('civitas_nama') ?></small>
                   </span>
                 </a>
