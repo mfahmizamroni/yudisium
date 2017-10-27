@@ -19,7 +19,9 @@ class Syarat_model extends CI_Model {
 	}
 
 	public function get_syarat_all(){
-		return $this->db->get('syarat');
+		$this->db->join('civitas', 'syarat_civitas_id = civitas_id');
+		$this->db->join('departemen', 'civitas_departemen_id = departemen_id');
+		return $this->db->get('syarat')->result();
 	}
 
 	public function get_syarat($id)

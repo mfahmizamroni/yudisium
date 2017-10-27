@@ -42,6 +42,7 @@
 											<thead>
 												<tr>
 													<th>No.</th>
+													<th>Departemen</th>
 													<th>NRP</th>
 													<th>Nama</th>
 													<th>Jenjang</th>
@@ -57,6 +58,7 @@
 													<tr>
 														<td><?php echo $a; ?></td>
 														<input type="hidden" name="mhs[]" value="<?= $mahasiswas->mhs_id ?>" disabled>
+														<td><?= $mahasiswas->departemen_nama ?></td>
 														<td><?= $mahasiswas->mhs_nrp ?></td>
 														<td><?= $mahasiswas->mhs_nama ?></td>
 														<td><?= $mahasiswas->mhs_jenjang ?></td>

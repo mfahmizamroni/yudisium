@@ -19,7 +19,8 @@ class Civitas_model extends CI_Model {
 	}
 
 	public function get_civitas_all(){
-		return $this->db->get('civitas');
+		$this->db->join('departemen', 'civitas_departemen_id = departemen_id');
+		return $this->db->get('civitas')->result();
 	}
 
 	public function get_civitas($id)
@@ -49,28 +50,19 @@ class Civitas_model extends CI_Model {
 		return $this->db->get()->result();
 	}
 
-	public function get_civitas_dosen($departemen_id)
+	public function get_civitas_by_tipe($tipe)
 	{
 		$this->db->from('civitas');
-		$this->db->where('civitas_tipe', 'Dosen Pembimbing');
-		$this->db->where('civitas_departemen_id', $departemen_id);
+		$this->db->where('civitas_tipe', $tipe);
 		return $this->db->get()->result();
 	}
 
-	public function get_civitas_lab($departemen_id)
+	public function get_civitas_by_tipe_departemen($tipe, $departemen_id)
 	{
 		$this->db->from('civitas');
-		$this->db->where('civitas_tipe', 'Laboratorium');
+		$this->db->where('civitas_tipe', $tipe);
 		$this->db->where('civitas_departemen_id', $departemen_id);
 		return $this->db->get()->result();
-	}
-
-	public function get_civitas_ruangbaca($departemen_id)
-	{
-		$this->db->from('civitas');
-		$this->db->where('civitas_tipe', 'Ruang Baca');
-		$this->db->where('civitas_departemen_id', $departemen_id);
-		return $this->db->get()->row();
 	}
 
 	public function get_jmc_per_mhs($mhs_id)

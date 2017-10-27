@@ -19,7 +19,7 @@ class Departemen_model extends CI_Model {
 	}
 
 	public function get_departemen_all(){
-		return $this->db->get('departemen');
+		return $this->db->get('departemen')->result();
 	}
 
 	public function get_departemen($id)

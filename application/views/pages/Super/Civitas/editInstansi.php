@@ -12,7 +12,7 @@
 					</div><!--end .col -->
 				</div><!--end .row -->
 				<!-- BEGIN VERTICAL FORM FLOATING LABELS -->
-				<?= form_open('super/addCivitas', array('class' => "form floating-label" )) ?>
+				<?= form_open('super/editCivitas', array('class' => "form floating-label" )) ?>
 					<div class="card">
 						<div class="card-head style-primary">
 							<header>Instansi</header>
@@ -24,9 +24,25 @@
 								<label>Nama Instansi</label>
 							</div>
 							<div class="form-group">
-								<input type="text" class="form-control" name="tipe" value="<?= $civitas->civitas_tipe ?>">
+								<select id="select1" name="tipe" class="form-control">
+									<option value="">&nbsp;</option>
+									<option value="Ruang Baca" <?php if($civitas->civitas_tipe == "Ruang Baca"){echo "selected";} ?>>Ruang Baca</option>
+									<option value="Laboratorium" <?php if($civitas->civitas_tipe == "Laboratorium"){echo "selected";} ?>>Laboratorium</option>
+									<option value="Dosen Pembimbing" <?php if($civitas->civitas_tipe == "Dosen Pembimbing"){echo "selected";} ?>>Dosen Pembimbing</option>
+								</select>
 								<label>Tipe Instansi</label>
 							</div>
+							<?php if ($this->session->userdata('departemen') == 0) { ?>
+							<div class="form-group">
+								<select id="select1" name="departemen" class="form-control">
+									<option value="">&nbsp;</option>
+									<?php foreach ($departemen as $departemens) { ?>
+										<option value="<?= $departemens->departemen_id ?>" <?php if($civitas->civitas_departemen_id == $departemens->departemen_id){echo "selected";} ?>><?= $departemens->departemen_nama ?></option>
+									<?php } ?>
+								</select>
+								<label>Departemen</label>
+							</div>
+							<?php } ?>
 							<br>
 
 						</div><!--end .card-body -->

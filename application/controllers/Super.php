@@ -30,7 +30,11 @@ class Super extends CI_Controller {
 
 		$data = new stdClass();
 		$civitas_id = $this->session->userdata('civitas_id');
-		$mahasiswa = $this->mhs_model->get_mhs_per_departemen($this->session->userdata('departemen_id'));
+		if ($this->session->userdata('departemen_id') == 0) {
+	    	$mahasiswa = $this->mhs_model->get_mhs_all();
+	    } else {	
+	    	$mahasiswa = $this->mhs_model->get_mhs_per_departemen($this->session->userdata('departemen_id'));
+	    }
 
 		$data = array('mahasiswa'=>$mahasiswa);
 
@@ -209,10 +213,13 @@ class Super extends CI_Controller {
 	// Begin Menu Instansi //
 	public function daftarCivitas()
 	{
-
 		$data = new stdClass();
 		$departemen = $this->departemen_model->get_departemen($this->session->userdata('departemen_id'));
-		$civitas = $this->civitas_model->get_civitas_per_departemen($this->session->userdata('departemen_id'));
+		if ($this->session->userdata('departemen_id') == 0) {
+	    	$civitas = $this->civitas_model->get_civitas_all();
+	    } else {	
+	    	$civitas = $this->civitas_model->get_civitas_per_departemen($this->session->userdata('departemen_id'));
+	    }
 
 		$data = array('departemen'=>$departemen,'civitas'=>$civitas);
 
@@ -378,6 +385,9 @@ class Super extends CI_Controller {
 		$this->load->library('form_validation');
 
 		$data =  new stdClass();
+		$departemen = $this->departemen_model->get_departemen_all();
+
+		$data = array('departemen'=>$departemen);
 
 		$this->form_validation->set_rules('nama', 'Nama Civitas', 'required');
 		$this->form_validation->set_rules('tipe', 'Tipe Civitas', 'required');
@@ -385,14 +395,18 @@ class Super extends CI_Controller {
 		if ($this->form_validation->run() === false) {
 			$this->load->helper('url');
 			$this->load->view('master/Super/headerSA');
-			$this->load->view('pages/Super/Civitas/addInstansi');
+			$this->load->view('pages/Super/Civitas/addInstansi', $data);
 			$this->load->view('master/Super/navigationSA');
 			$this->load->view('master/formJs');
 			$this->load->view('master/footer');
 		} else {
 			$civitas_nama = $this->input->post('nama');
 			$civitas_tipe = $this->input->post('tipe');
-			$civitas_departemen = $this->session->userdata('departemen_id');
+			if ($this->session->userdata('departemen_id') == 0) {
+				$civitas_departemen = $this->input->post('departemen');
+			} else {
+				$civitas_departemen = $this->session->userdata('departemen_id');
+			}
 
 			if ($this->civitas_model->create_civitas($civitas_nama, $civitas_tipe, $civitas_departemen)) {
 				$success = "Civitas Created";
@@ -417,7 +431,7 @@ class Super extends CI_Controller {
 				if ($this->session->has_userdata('username')) {
 					$this->load->helper('url');
 					$this->load->view('master/Super/headerSA');
-					$this->load->view('pages/Super/Civitas/addInstansi');
+					$this->load->view('pages/Super/Civitas/addInstansi', $data);
 					$this->load->view('master/Super/navigationSA');
 					$this->load->view('master/formJs');
 					$this->load->view('master/footer');
@@ -436,8 +450,9 @@ class Super extends CI_Controller {
 
 		$data =  new stdClass();
 		$civitas = $this->civitas_model->get_civitas($civitas_id);
+		$departemen = $this->departemen_model->get_departemen_all();
 
-		$data = array('civitas'=>$civitas);
+		$data = array('civitas'=>$civitas,'departemen'=>$departemen);
 
 		$this->form_validation->set_rules('nama', 'Nama Civitas', 'required');
 		$this->form_validation->set_rules('tipe', 'Tipe Civitas', 'required');
@@ -452,7 +467,11 @@ class Super extends CI_Controller {
 		} else {
 			$civitas_nama = $this->input->post('nama');
 			$civitas_tipe = $this->input->post('tipe');
-			$civitas_departemen = $this->session->userdata('departemen_id');
+			if ($this->session->userdata('departemen_id') == 0) {
+				$civitas_departemen = $this->input->post('departemen');
+			} else {
+				$civitas_departemen = $this->session->userdata('departemen_id');
+			}
 
 			if ($this->civitas_model->create_civitas($civitas_nama, $civitas_tipe, $civitas_departemen)) {
 				$success = "Civitas Created";
@@ -494,7 +513,11 @@ class Super extends CI_Controller {
 
 		$data = new stdClass();
 		$departemen = $this->departemen_model->get_departemen($this->session->userdata('departemen_id'));
-		$user = $this->user_model->get_user_per_departemen($this->session->userdata('departemen_id'));
+		if ($this->session->userdata('departemen_id') == 0) {
+	    	$user = $this->user_model->get_user_all();
+	    } else {	
+	    	$user = $this->user_model->get_user_per_departemen($this->session->userdata('departemen_id'));
+	    }
 
 		$data = array('departemen'=>$departemen,'user'=>$user);
 
@@ -518,7 +541,11 @@ class Super extends CI_Controller {
 
 		$data =  new stdClass();
 		$departemen = $this->departemen_model->get_departemen($this->session->userdata('departemen_id'));
-		$civitas = $this->civitas_model->get_civitas_per_departemen($this->session->userdata('departemen_id'));
+		if ($this->session->userdata('departemen_id') == 0) {
+	    	$civitas = $this->civitas_model->get_civitas_all();
+	    } else {	
+	    	$civitas = $this->civitas_model->get_civitas_per_departemen($this->session->userdata('departemen_id'));
+	    }
 
 		$data = array('departemen'=>$departemen,'civitas'=>$civitas);
 
@@ -585,7 +612,11 @@ class Super extends CI_Controller {
 
 		$data =  new stdClass();
 		$departemen = $this->departemen_model->get_departemen($this->session->userdata('departemen_id'));
-		$civitas = $this->civitas_model->get_civitas_per_departemen($this->session->userdata('departemen_id'));
+		if ($this->session->userdata('departemen_id') == 0) {
+	    	$civitas = $this->civitas_model->get_civitas_all();
+	    } else {	
+	    	$civitas = $this->civitas_model->get_civitas_per_departemen($this->session->userdata('departemen_id'));
+	    }
 		$user = $this->user_model->get_user($id);
 
 		$data = array('departemen'=>$departemen,'civitas'=>$civitas,'user'=>$user);
@@ -682,7 +713,7 @@ class Super extends CI_Controller {
 
 		$this->load->library('session');
 		if ($this->session->has_userdata('username')) {
-			header('location:'.base_url().'super/daftarUserCivitas');
+			header('location:'.base_url().'super/daftarCivitas');
 			$this->session->set_flashdata('success', $success);
 		} else {
 			$this->load->helper('url');
@@ -714,8 +745,13 @@ class Super extends CI_Controller {
 	{
 
 		$data = new stdClass();
-		$departemen = $this->departemen_model->get_departemen($this->session->userdata('departemen_id'));
-		$syarat = $this->syarat_model->get_syarat_per_departemen($this->session->userdata('departemen_id'));
+		if ($this->session->userdata('departemen_id') == 0) {
+	    	$departemen = $this->departemen_model->get_departemen($this->session->userdata('departemen_id'));
+			$syarat = $this->syarat_model->get_syarat_all($this->session->userdata('departemen_id'));
+	    } else {	
+	    	$departemen = $this->departemen_model->get_departemen($this->session->userdata('departemen_id'));
+			$syarat = $this->syarat_model->get_syarat_per_departemen($this->session->userdata('departemen_id'));
+	    }
 
 		$data = array('departemen'=>$departemen,'syarat'=>$syarat);
 
@@ -738,7 +774,11 @@ class Super extends CI_Controller {
 
 		// create the data object
 	    $data = new stdClass();
-	    $civitas = $this->civitas_model->get_civitas_per_departemen($this->session->userdata('departemen_id'));
+	    if ($this->session->userdata('departemen_id') == 0) {
+	    	$civitas = $this->civitas_model->get_civitas_all();
+	    } else {	
+	    	$civitas = $this->civitas_model->get_civitas_per_departemen($this->session->userdata('departemen_id'));
+	    }
 
 	    $data = array('civitas'=>$civitas);
 
@@ -820,7 +860,11 @@ class Super extends CI_Controller {
 
 		// create the data object
 	    $data = new stdClass();
-	    $civitas = $this->civitas_model->get_civitas_per_departemen($this->session->userdata('departemen_id'));
+	    if ($this->session->userdata('departemen_id') == 0) {
+	    	$civitas = $this->civitas_model->get_civitas_all();
+	    } else {	
+	    	$civitas = $this->civitas_model->get_civitas_per_departemen($this->session->userdata('departemen_id'));
+	    }
 	    $syarat = $this->syarat_model->get_syarat($id);
 
 	    $data = array('civitas'=>$civitas,'syarat'=>$syarat,'id'=>$id);

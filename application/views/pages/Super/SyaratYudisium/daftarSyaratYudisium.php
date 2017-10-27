@@ -41,7 +41,9 @@
 											<th>Syarat Yudisium</th>
 											<th>Deskripsi</th>
 											<th>Jenis Pengumpulan</th>
+											<th>Jenjang</th>
 											<th>Civitas</th>
+											<th>Departemen</th>
 											<th>action</th>
 										</tr>
 									</thead>
@@ -54,7 +56,9 @@
 											<td><?= $syarats->syarat_nama ?></td>
 											<td><?= $syarats->syarat_deskripsi ?></td>
 											<td><?= $syarats->syarat_jenis ?></td>
+											<td><?= $syarats->syarat_jenjang ?></td>
 											<td><?= $syarats->civitas_nama ?></td>
+											<td><?= $syarats->departemen_nama ?></td>
 											<td>
 												<a href="<?= base_url().'super/editSyaratYudisium/'.$syarats->syarat_id ?>"><button class="btn ink-reaction btn-primary btn-xs"><i class="fa fa-fw fa-pencil"></i></button></a>
 												<a href="<?= base_url().'super/deleteSyaratYudisium/'.$syarats->syarat_id ?>"><button class="btn ink-reaction btn-danger btn-xs"><i class="fa fa-fw fa-trash"></i></button></a>

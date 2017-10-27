@@ -30,6 +30,7 @@
 								<thead>
 									<tr>
 										<th>No.</th>
+										<th>Departemen</th>
 										<th>Civitas</th>
 										<th>#</th>
 									</tr>
@@ -39,6 +40,7 @@
 									foreach ($civitas as $civitass) { ?>
 									<tr>
 										<td><?= $a ?></td>
+										<td><?= $civitass->departemen_nama ?></td>
 										<td><?= $civitass->civitas_nama ?></td>
 										<td>
 											<a href="<?= base_url()."super/detailCivitas/".$civitass->civitas_id ?>"><button class="btn btn-primary btn-xs ink-reaction">Details</button></a>

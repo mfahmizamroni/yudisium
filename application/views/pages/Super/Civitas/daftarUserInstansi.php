@@ -30,6 +30,7 @@
 								<thead>
 									<tr>
 										<th>No.</th>
+										<th>Departemen</th>
 										<th>Nama</th>
 										<th>Username</th>
 										<th>Email</th>
@@ -42,6 +43,7 @@
 									foreach ($user as $users) { ?>
 									<tr>
 										<td><?= $a ?></td>
+										<td><?= $users->departemen_nama ?></td>
 										<td><?= $users->adm_nama ?></td>
 										<td><?= $users->adm_username ?></td>
 										<td><?= $users->adm_email ?></td>

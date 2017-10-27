@@ -32,6 +32,17 @@
 								</select>
 								<label>Tipe Instansi</label>
 							</div>
+							<?php if ($this->session->userdata('departemen') == 0) { ?>
+							<div class="form-group">
+								<select id="select1" name="departemen" class="form-control">
+									<option value="">&nbsp;</option>
+									<?php foreach ($departemen as $departemens) { ?>
+										<option value="<?= $departemens->departemen_id ?>"><?= $departemens->departemen_nama ?></option>
+									<?php } ?>
+								</select>
+								<label>Departemen</label>
+							</div>
+							<?php } ?>
 							<br>
 
 						</div><!--end .card-body -->

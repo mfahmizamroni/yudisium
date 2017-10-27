@@ -19,9 +19,9 @@ class User_model extends CI_Model {
 	}
 
 	public function get_user_all() {
-		
-		return $this->db->get('adm');
-		
+		$this->db->join('civitas', 'adm_civitas_id = civitas_id');
+		$this->db->join('departemen', 'civitas_departemen_id = departemen_id');
+		return $this->db->get('adm')->result();
 	}
 
 	public function get_user_count() {

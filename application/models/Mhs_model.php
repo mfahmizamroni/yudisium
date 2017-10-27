@@ -19,7 +19,8 @@ class Mhs_model extends CI_Model {
 	}
 
 	public function get_mhs_all(){
-		return $this->db->get('mhs');
+		$this->db->join('departemen', 'mhs_departemen_id = departemen_id');
+		return $this->db->get('mhs')->result();
 	}
 
 	public function get_mhs($id)

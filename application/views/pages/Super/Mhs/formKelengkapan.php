@@ -39,6 +39,7 @@
 									<tr>
 										<th>No.</th>
 										<th>Syarat Yudisium</th>
+										<th>Nama Civitas</th>
 										<th>Status</th>
 										<th>Keterangan</th>
 										<th>#</th>
@@ -50,6 +51,7 @@
 									<tr>
 										<td><?= $a ?></td>
 										<td><?= $formBebass->civitas_form_bebas ?></td>
+										<td><?= $formBebass->civitas_nama ?></td>
 										<?php if ($formBebass->minstat == 0) { ?>
 										<td><a class="btn btn-xs ink-reaction btn-danger disabled">Not Approved</a></td>
 										<?php } else { ?>

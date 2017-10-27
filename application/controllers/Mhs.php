@@ -120,8 +120,8 @@ class Mhs extends CI_Controller {
 
 		$data =  new stdClass();
 		$mahasiswa = $this->mhs_model->get_mhs_jmc($this->session->userdata('id'));
-		$dosen = $this->civitas_model->get_civitas_dosen($this->session->userdata('departemen_id'));
-		$lab = $this->civitas_model->get_civitas_lab($this->session->userdata('departemen_id'));
+		$dosen = $this->civitas_model->get_civitas_by_tipe_departemen('Dosen Pembimbing', $this->session->userdata('departemen_id'));
+		$lab = $this->civitas_model->get_civitas_by_tipe_departemen('Laboratorium', $this->session->userdata('departemen_id'));
 
 		$data = array('mahasiswa'=>$mahasiswa,'dosen'=>$dosen,'lab'=>$lab);
 
@@ -160,7 +160,8 @@ class Mhs extends CI_Controller {
 			$id = $this->session->userdata('id');
 			$jenjang = $this->session->userdata('jenjang');
 
-			$ruang_baca = $this->civitas_model->get_civitas_ruangbaca($this->session->userdata('departemen_id'));
+			$ruang_baca = $this->civitas_model->get_civitas_by_tipe_departemen('Ruang Baca', $this->session->userdata('departemen_id'));
+			$perpus = $this->civitas_model->get_civitas_by_tipe('Perpustakaan');
 			$check_jmc = $this->civitas_model->get_jmc_per_mhs($id);
 			$check_jms = $this->syarat_model->get_jms_per_mhs($id);
 
@@ -169,22 +170,26 @@ class Mhs extends CI_Controller {
 				if (count($check_jmc) > 0) {
 					$this->civitas_model->update_jmc($check_jmc[0]->jmc_mhs_id, $check_jmc[0]->jmc_civitas_id, $id, $dosen);
 					$this->civitas_model->update_jmc($check_jmc[1]->jmc_mhs_id, $check_jmc[1]->jmc_civitas_id, $id, $lab);
-					$this->civitas_model->update_jmc($check_jmc[2]->jmc_mhs_id, $check_jmc[2]->jmc_civitas_id, $id, $ruang_baca->civitas_id);
+					$this->civitas_model->update_jmc($check_jmc[2]->jmc_mhs_id, $check_jmc[2]->jmc_civitas_id, $id, $ruang_baca[0]->civitas_id);
+					$this->civitas_model->update_jmc($check_jmc[3]->jmc_mhs_id, $check_jmc[3]->jmc_civitas_id, $id, $perpus[0]->civitas_id);
 				} else {
-					$jmc1 = $this->civitas_model->create_jmc($id, $dosen);
-					$jmc2 = $this->civitas_model->create_jmc($id, $lab);
-					$jmc3 = $this->civitas_model->create_jmc($id, $ruang_baca->civitas_id);
+					$this->civitas_model->create_jmc($id, $dosen);
+					$this->civitas_model->create_jmc($id, $lab);
+					$this->civitas_model->create_jmc($id, $ruang_baca[0]->civitas_id);
+					$this->civitas_model->create_jmc($id, $perpus[0]->civitas_id);
 				}
 			} else {
 				$update = $this->mhs_model->update_mhs($id, $password, $gender, $nama, $tanggal, $notelp, $lamastudi, $jenjang);
 				if ($check_jmc) {
-					$jmc1 = $this->civitas_model->update_jmc($check_jmc[0]->jmc_mhs_id, $check_jmc[0]->jmc_civitas_id, $id, $dosen);
-					$jmc2 = $this->civitas_model->update_jmc($check_jmc[1]->jmc_mhs_id, $check_jmc[1]->jmc_civitas_id, $id, $lab);
-					$jmc3 = $this->civitas_model->update_jmc($check_jmc[2]->jmc_mhs_id, $check_jmc[2]->jmc_civitas_id, $id, $ruang_baca->civitas_id);
+					$this->civitas_model->update_jmc($check_jmc[0]->jmc_mhs_id, $check_jmc[0]->jmc_civitas_id, $id, $dosen);
+					$this->civitas_model->update_jmc($check_jmc[1]->jmc_mhs_id, $check_jmc[1]->jmc_civitas_id, $id, $lab);
+					$this->civitas_model->update_jmc($check_jmc[2]->jmc_mhs_id, $check_jmc[2]->jmc_civitas_id, $id, $ruang_baca[0]->civitas_id);
+					$this->civitas_model->update_jmc($check_jmc[3]->jmc_mhs_id, $check_jmc[3]->jmc_civitas_id, $id, $perpus[0]->civitas_id);
 				} else {
-					$jmc1 = $this->civitas_model->create_jmc($id, $dosen);
-					$jmc2 = $this->civitas_model->create_jmc($id, $lab);
-					$jmc3 = $this->civitas_model->create_jmc($id, $ruang_baca->civitas_id);
+					$this->civitas_model->create_jmc($id, $dosen);
+					$this->civitas_model->create_jmc($id, $lab);
+					$this->civitas_model->create_jmc($id, $ruang_baca[0]->civitas_id);
+					$this->civitas_model->create_jmc($id, $perpus[0]->civitas_id);
 				}
 			}
 
@@ -192,27 +197,55 @@ class Mhs extends CI_Controller {
 				$syaratdosen = $this->syarat_model->get_syarat_per_civitas($dosen);
 				$a = 0;
 				for ($i=0; $i < count($syaratdosen); $i++) { 
-					$this->syarat_model->update_jms($check_jms[$i]->jms_mhs_id, $check_jms[$i]->jms_syarat_id, $id, $syaratdosen[$i]->syarat_id);
-					$a++;
+					if ($syaratdosen[$i]->syarat_jenjang == $this->session->userdata('jenjang')) {
+						$this->syarat_model->update_jms($check_jms[$a]->jms_mhs_id, $check_jms[$a]->jms_syarat_id, $id, $syaratdosen[$i]->syarat_id);
+						$a++;
+					}
 				}
 				$syaratlab = $this->syarat_model->get_syarat_per_civitas($lab);
-				for ($i=$a; $i < count($syaratlab)+$a; $i++) { 
-					$this->syarat_model->update_jms($check_jms[$i]->jms_mhs_id, $check_jms[$i]->jms_syarat_id, $id, $syaratlab[$i]->syarat_id);
+				for ($i=0; $i < count($syaratlab); $i++) { 
+					if ($syaratlab[$i]->syarat_jenjang == $this->session->userdata('jenjang')) {
+						$this->syarat_model->update_jms($check_jms[$a]->jms_mhs_id, $check_jms[$a]->jms_syarat_id, $id, $syaratlab[$i]->syarat_id);
+						$a++;
+					}
+				}
+				$syaratruangbaca = $this->syarat_model->get_syarat_per_civitas($ruang_baca[0]->civitas_id);
+				for ($i=0; $i < count($syaratruangbaca); $i++) { 
+					if ($syaratruangbaca[$i]->syarat_jenjang == $this->session->userdata('jenjang')) {
+						$this->syarat_model->update_jms($check_jms[$a]->jms_mhs_id, $check_jms[$a]->jms_syarat_id, $id, $syaratruangbaca[$i]->syarat_id);
+						$a++;
+					}
+				}
+				$syaratperpus = $this->syarat_model->get_syarat_per_civitas($perpus[0]->civitas_id);
+				for ($i=0; $i < count($syaratperpus); $i++) { 
+					if ($syaratperpus[$i]->syarat_jenjang == $this->session->userdata('jenjang')) {
+						$this->syarat_model->update_jms($check_jms[$a]->jms_mhs_id, $check_jms[$a]->jms_syarat_id, $id, $syaratperpus[$i]->syarat_id);
+					}
 				}
 			} else {
 				$syaratdosen = $this->syarat_model->get_syarat_per_civitas($dosen);
-				$a = 0;
 				for ($i=0; $i < count($syaratdosen); $i++) { 
-					$this->syarat_model->create_jms($id, $syaratdosen[$i]->syarat_id, $dosen);
-					$a++;
+					if ($syaratdosen[$i]->syarat_jenjang == $this->session->userdata('jenjang')) {
+						$this->syarat_model->create_jms($id, $syaratdosen[$i]->syarat_id, $dosen);
+					}
 				}
 				$syaratlab = $this->syarat_model->get_syarat_per_civitas($lab);
-				for ($i=$a; $i < count($syaratlab)+$a; $i++) { 
-					$this->syarat_model->create_jms($id, $syaratlab[$i]->syarat_id, $lab);
+				for ($i=0; $i < count($syaratlab); $i++) { 
+					if ($syaratlab[$i]->syarat_jenjang == $this->session->userdata('jenjang')) {
+						$this->syarat_model->create_jms($id, $syaratlab[$i]->syarat_id, $lab);
+					}
 				}
-				$syaratruangbaca = $this->syarat_model->get_syarat_per_civitas($ruang_baca->civitas_id);
-				for ($i=$a; $i < count($syaratruangbaca)+$a; $i++) { 
-					$this->syarat_model->create_jms($id, $syaratruangbaca[$i]->syarat_id, $ruang_baca->civitas_id);
+				$syaratruangbaca = $this->syarat_model->get_syarat_per_civitas($ruang_baca[0]->civitas_id);
+				for ($i=0; $i < count($syaratruangbaca); $i++) { 
+					if ($syaratruangbaca[$i]->syarat_jenjang == $this->session->userdata('jenjang')) {
+						$this->syarat_model->create_jms($id, $syaratruangbaca[$i]->syarat_id, $ruang_baca[0]->civitas_id);
+					}
+				}
+				$syaratperpus = $this->syarat_model->get_syarat_per_civitas($perpus[0]->civitas_id);
+				for ($i=0; $i < count($syaratperpus); $i++) { 
+					if ($syaratperpus[$i]->syarat_jenjang == $this->session->userdata('jenjang')) {
+						$this->syarat_model->create_jms($id, $syaratperpus[$i]->syarat_id, $perpus[0]->civitas_id);
+					}
 				}
 			}
 
