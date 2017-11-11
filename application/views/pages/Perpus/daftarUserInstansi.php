@@ -6,7 +6,7 @@
 				<div class="section-body contain-lg">
 					<div class="row">
 						<div class="col-lg-12 text-center">
-							<h1><span class=" text-light">Daftar Civitas</span></h1>
+							<h1><span class=" text-light">Daftar User Civitas</span></h1>
 							<h2><span class="text-light">Departemen <?= $departemen->departemen_nama ?></span></h2>
 						</div><!--end .col -->
 					</div><!--end .row -->
@@ -47,8 +47,8 @@
 										<td><?= $users->adm_email ?></td>
 										<td><?= $users->civitas_nama ?></td>
 										<td>
-											<a href="<?= base_url().'super/editUserCivitas/'.$users->adm_id ?>"><button class="btn ink-reaction btn-primary btn-xs"><i class="fa fa-fw fa-pencil"></i></button></a>
-											<a href="<?= base_url().'super/deleteUserCivitas/'.$users->adm_id ?>"><button class="btn ink-reaction btn-danger btn-xs"><i class="fa fa-fw fa-trash"></i></button></a>	
+											<a href="<?= base_url().'perpus/editUserCivitas/'.$users->adm_id ?>"><button class="btn ink-reaction btn-primary btn-xs"><i class="fa fa-fw fa-pencil"></i></button></a>
+											<a href="<?= base_url().'perpus/deleteUserCivitas/'.$users->adm_id ?>"><button class="btn ink-reaction btn-danger btn-xs"><i class="fa fa-fw fa-trash"></i></button></a>	
 										</td>
 									</tr>
 									<?php $a++; } ?>

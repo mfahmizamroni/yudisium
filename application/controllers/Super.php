@@ -72,7 +72,7 @@ class Super extends CI_Controller {
 				$this->load->library('session');
 				if ($this->session->has_userdata('username')) {
 					$this->load->helper('url');
-					header('location:'.base_url().'form/daftarMahasiswa');
+					header('location:'.base_url().'super');
 					$this->session->set_flashdata('success', $success);
 				} else {
 					$this->load->helper('url');
@@ -129,65 +129,65 @@ class Super extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 
-		$data = new stdClass();
+		$data =  new stdClass();
+		$mahasiswa = $this->mhs_model->get_mhs_per_civitas_with_syarat_per_id($civitas_id, $mhs_id);
 		$civitas = $this->civitas_model->get_civitas($civitas_id);
-		$syarat = $this->syarat_model->get_syarat_per_civitas_per_mhs($civitas_id, $mhs_id);
-		$mahasiswa = $this->mhs_model->get_mhs($mhs_id);
 
-		$this->form_validation->set_rules('syarat[]', '', 'required');
+		$data = array('mahasiswa'=>$mahasiswa,'civitas'=>$civitas);
 
-		$data = array('syarat'=>$syarat,'civitas'=>$civitas,'mahasiswa'=>$mahasiswa);
+		$this->form_validation->set_rules('jms1', ' ', 'required');
 
 		if ($this->form_validation->run() === false) {
-			if ($this->session->has_userdata('username')) {
-				$this->load->helper('url');
-				$this->load->view('master/Super/headerSA');
-				$this->load->view('pages/Super/Mhs/addLink', $data);
-				$this->load->view('master/Super/navigationSA');
-				$this->load->view('master/formJs');
-				$this->load->view('master/footer');
-			} else {
-				$this->load->helper('url');
-				header('location:'.base_url().'user/login');
-			}
+			$this->load->helper('url');
+			$this->load->view('master/Super/headerSA');
+			$this->load->view('pages/Super/Mhs/detailMahasiswa', $data);
+			$this->load->view('master/Super/navigationSA');
+			$this->load->view('master/formJs');
+			$this->load->view('master/footer');
 		} else {
+			$data =  new stdClass();
+			$i = 1;
 			$temp = "";
-			$bukti = $this->input->post('bukti');
-			$syarat = $this->input->post('syarat');
 
-			for($i=0;$i<sizeof($bukti);$i++)
-			{
-			    $syarat_id = $syarat[$i];
-			    $temp = $this->syarat_model->update_bukti_jms_per_mahasiswa($mhs_id, $syarat_id, $bukti[$i]);
+			while ($this->input->post('jms'.$i)) {
+				$jms = $this->input->post('jms'.$i);
+				$status = $this->input->post('status'.$i);
+				$temp = $this->syarat_model->update_status_jms($jms, $status);
+				$i++;
 			}
 
 			if ($temp) {
-				$success = "Bukti Updated";
-				$data = array('success' => $success );
+				$success = "Mahasiswa Updated";
+				$mahasiswa = $this->mhs_model->get_mhs_per_civitas_with_syarat_per_id($civitas_id, $mhs_id);
+
+				$data = array('success' => $success, 'mahasiswa' => $mahasiswa );
 
 				$this->load->library('session');
-				if ($this->session->has_userdata('nama')) {
+				if ($this->session->has_userdata('username')) {
+					// $this->load->helper('url');
+					// $this->load->view('master/Civitas/header');
+					// $this->load->view('pages/Civitas/detailMahasiswa', $data);
+					// $this->load->view('master/Civitas/navigation');
+					// $this->load->view('master/formJs');
+					// $this->load->view('master/footer');
 					$this->load->helper('url');
-					header('location:'.base_url().'super/formKelengkapanMahasiswa');
+					header('location:'.base_url().'super');
 					$this->session->set_flashdata('success', $success);
 				} else {
 					$this->load->helper('url');
-					header('location:'.base_url().'mhs/login');
+					header('location:'.base_url().'user/login');
 				}
 
 			} else {
 
-				$data = new stdClass();
-				$syarat = $this->syarat_model->get_syarat_per_civitas_per_mhs($civitas_id, $this->session->userdata('id'));
-				$data = array('syarat'=>$syarat);
         		// user creation failed, this should never happen
 				$data->error = 'There was a problem Please try again.';
 
 				$this->load->library('session');
-				if ($this->session->has_userdata('nama')) {
+				if ($this->session->has_userdata('username')) {
 					$this->load->helper('url');
 					$this->load->view('master/Super/headerSA');
-					$this->load->view('pages/Super/Mhs/addLink', $data);
+					$this->load->view('pages/Super/Mhs/detailMahasiswa', $data);
 					$this->load->view('master/Super/navigationSA');
 					$this->load->view('master/formJs');
 					$this->load->view('master/footer');
@@ -570,7 +570,7 @@ class Super extends CI_Controller {
 			$adm_password = $this->input->post('password');
 			$adm_civitas_id = $this->input->post('civitas');
 
-			if ($this->user_model->create_user($adm_nama, $adm_username, $adm_email, $adm_password, $adm_civitas_id, 0)) {
+			if ($this->user_model->create_user($adm_nama, $adm_username, $adm_email, $adm_password, $adm_civitas_id, 1)) {
 				$success = "User Civitas Created";
 				$data = array('success' => $success);
 
@@ -745,20 +745,37 @@ class Super extends CI_Controller {
 	{
 
 		$data = new stdClass();
-		if ($this->session->userdata('departemen_id') == 0) {
-	    	$departemen = $this->departemen_model->get_departemen($this->session->userdata('departemen_id'));
-			$syarat = $this->syarat_model->get_syarat_all($this->session->userdata('departemen_id'));
-	    } else {	
-	    	$departemen = $this->departemen_model->get_departemen($this->session->userdata('departemen_id'));
-			$syarat = $this->syarat_model->get_syarat_per_departemen($this->session->userdata('departemen_id'));
-	    }
+		$departemen = $this->departemen_model->get_departemen($this->session->userdata('departemen_id'));
+		$civitas = $this->civitas_model->get_civitas_per_departemen($departemen->departemen_id);
+
+		$data = array('civitas'=>$civitas,'departemen'=>$departemen);
+
+		if ($this->session->has_userdata('username')) {
+			$this->load->helper('url');
+			$this->load->view('master/super/headerSA');
+			$this->load->view('pages/Super/SyaratYudisium/daftarSyaratYudisium',$data);
+			$this->load->view('master/Super/navigationSA');
+			$this->load->view('master/tableJs');
+			$this->load->view('master/footer');
+		} else {
+			$this->load->helper('url');
+			header('location:'.base_url().'user/login');
+		}
+	}
+
+	public function detailSyarat($civitas_id)
+	{
+
+		$data = new stdClass();
+		$departemen = $this->departemen_model->get_departemen($this->session->userdata('departemen_id'));
+		$syarat = $this->syarat_model->get_syarat_per_civitas($civitas_id);
 
 		$data = array('departemen'=>$departemen,'syarat'=>$syarat);
 
 		if ($this->session->has_userdata('username')) {
 			$this->load->helper('url');
 			$this->load->view('master/super/headerSA');
-			$this->load->view('pages/Super/SyaratYudisium/daftarSyaratYudisium',$data);
+			$this->load->view('pages/Super/SyaratYudisium/detailSyaratYudisium',$data);
 			$this->load->view('master/Super/navigationSA');
 			$this->load->view('master/tableJs');
 			$this->load->view('master/footer');

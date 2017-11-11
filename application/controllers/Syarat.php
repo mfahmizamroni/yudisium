@@ -76,7 +76,7 @@ class Syarat extends CI_Controller {
 
 			if ($insert_id) {
 
-				$mhs_per_civitas = $this->mhs_model->get_mhs_per_civitas($civitas);
+				$mhs_per_civitas = $this->mhs_model->get_mhs_per_civitas_per_jenjang($civitas, $jenjang);
 				foreach ($mhs_per_civitas as $mhs) {
 					$this->syarat_model->create_jms($mhs->mhs_id, $insert_id, $civitas);
 				}

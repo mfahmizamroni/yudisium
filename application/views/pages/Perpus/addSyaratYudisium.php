@@ -11,7 +11,7 @@
 						<h1 class="text-primary">Syarat Yudisium</h1>
 					</div><!--end .col -->
 				</div><!--end .row -->
-				<?= form_open('syarat/addSyaratYudisium/', array('class' => "form floating-label" )) ?>
+				<?= form_open('perpus/addSyaratYudisium/', array('class' => "form floating-label" )) ?>
 				<div class="card">
 					<div class="card-head style-primary">
 						<header>Tambah Syarat Yudisium</header>

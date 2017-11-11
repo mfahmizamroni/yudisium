@@ -42,7 +42,7 @@
             <ul class="header-nav header-nav-options">
               <li class="header-nav-brand" >
                 <div class="brand-holder">
-                  <a href="<?php echo base_url();?>super/">
+                  <a href="<?php echo base_url();?>perpus/">
                     <span class="text-lg text-bold text-primary">SIM Yudisium</span>
                   </a>
                 </div>
@@ -70,48 +70,31 @@
                 </a>
                 <ul class="dropdown-menu animation-dock">
                   <li>
-                    <a class="" href="<?= base_url()."super/" ?>">
+                    <a class="" href="<?= base_url()."perpus/" ?>">
                       <span class="title">Daftar Mahasiswa</span>
                     </a>
                   </li>
                   <li>
-                    <a class="" href="<?= base_url()."super/addMahasiswa/" ?>">
+                    <a class="" href="<?= base_url()."perpus/addMahasiswa/" ?>">
                       <span class="title">Tambah Mahasiswa</span>
                     </a>
                   </li>
                 </ul><!--end .dropdown-menu -->
               </li><!--end .dropdown -->
 
-              <li class="dropdown hidden-xs">
-                <a href="javascript:void(0);" class="btn btn-flat ink-reaction btn-primary" data-toggle="dropdown">
-                  CIVITAS
-                </a>
-                <ul class="dropdown-menu animation-dock">
-                  <li>
-                    <a class="" href="<?= base_url()."super/daftarCivitas" ?>">
-                      <span class="title">Daftar Civitas</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="" href="<?= base_url()."super/addCivitas" ?>">
-                      <span class="title">Tambah Civitas</span>
-                    </a>
-                  </li>
-                </ul><!--end .dropdown-menu -->
-              </li><!--end .dropdown -->
-
+              <?php if ($this->session->userdata('role') == 3) { ?>
               <li class="dropdown hidden-xs">
                 <a href="javascript:void(0);" class="btn btn-flat ink-reaction btn-primary" data-toggle="dropdown">
                   USER
                 </a>
                 <ul class="dropdown-menu animation-dock">
                   <li>
-                    <a class="" href="<?= base_url()."super/daftarUserCivitas" ?>">
+                    <a class="" href="<?= base_url()."perpus/daftarUserCivitas" ?>">
                       <span class="title">Daftar User Civitas</span>
                     </a>
                   </li>
                   <li>
-                    <a class="" href="<?= base_url()."super/addUserCivitas" ?>">
+                    <a class="" href="<?= base_url()."perpus/addUserCivitas" ?>">
                       <span class="title">Tambah User Civitas</span>
                     </a>
                   </li>
@@ -124,17 +107,18 @@
                 </a>
                 <ul class="dropdown-menu animation-dock">
                   <li>
-                    <a class="" href="<?= base_url()."super/daftarSyaratYudisium" ?>">
+                    <a class="" href="<?= base_url()."perpus/daftarSyaratYudisium" ?>">
                       <span class="title">Daftar Syarat Yudisium</span>
                     </a>
                   </li>
                   <li>
-                    <a class="" href="<?= base_url()."super/addSyaratYudisium" ?>">
+                    <a class="" href="<?= base_url()."perpus/addSyaratYudisium" ?>">
                       <span class="title">Tambah Syarat Yudisium</span>
                     </a>
                   </li>
                 </ul><!--end .dropdown-menu -->
               </li><!--end .dropdown -->
+              <?php } ?>
 
             </ul>
 

@@ -39,6 +39,14 @@ class User_model extends CI_Model {
 		$this->db->where('civitas_departemen_id', $departemen_id);
 		return $this->db->get()->result();
 	}
+
+	public function get_user_per_civitas($civitas_id)
+	{
+		$this->db->from('adm');
+		$this->db->join('civitas', 'adm_civitas_id = civitas_id');
+		$this->db->where('civitas_id', $civitas_id);
+		return $this->db->get()->result();
+	}
 	
 	/**
 	 * create_user function.

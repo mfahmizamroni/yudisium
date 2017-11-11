@@ -19,8 +19,13 @@ class Mhs_model extends CI_Model {
 	}
 
 	public function get_mhs_all(){
+		$this->db->select(array('*','MIN(jmc_status) as minstat'));
+		$this->db->from('mhs');
 		$this->db->join('departemen', 'mhs_departemen_id = departemen_id');
-		return $this->db->get('mhs')->result();
+		$this->db->join('junc_mhs_civitas', 'mhs_id = jmc_mhs_id', 'LEFT');
+		$this->db->join('civitas', 'civitas_id = jmc_civitas_id', 'LEFT');
+		$this->db->group_by('mhs_id');
+		return $this->db->get()->result();
 	}
 
 	public function get_mhs($id)
@@ -43,13 +48,29 @@ class Mhs_model extends CI_Model {
 		$this->db->from('mhs');
 		$this->db->join('junc_mhs_civitas', 'mhs_id = jmc_mhs_id');
 		$this->db->join('civitas', 'civitas_id = jmc_civitas_id');
+		$this->db->where('civitas_id', $civitas_id);
+		return $this->db->get()->result();
+	}
+
+	public function get_mhs_per_civitas_per_jenjang($civitas_id, $jenjang)
+	{
+		$this->db->from('mhs');
+		$this->db->join('junc_mhs_civitas', 'mhs_id = jmc_mhs_id');
+		$this->db->join('civitas', 'civitas_id = jmc_civitas_id');
+		$this->db->where('civitas_id', $civitas_id);
+		$this->db->where('mhs_jenjang', $jenjang);
 		return $this->db->get()->result();
 	}
 
 	public function get_mhs_per_departemen($departemen_id)
 	{
+		$this->db->select(array('*','MIN(jmc_status) as minstat'));
 		$this->db->from('mhs');
 		$this->db->join('departemen', 'mhs_departemen_id = departemen_id');
+		$this->db->join('junc_mhs_civitas', 'mhs_id = jmc_mhs_id', 'LEFT');
+		$this->db->join('civitas', 'civitas_id = jmc_civitas_id', 'LEFT');
+		$this->db->where('departemen_id', $departemen_id);
+		$this->db->group_by('mhs_id');
 		return $this->db->get()->result();
 	}
 
@@ -70,6 +91,9 @@ class Mhs_model extends CI_Model {
 		$this->db->join('syarat', 'civitas_id = syarat_civitas_id');
 		$this->db->join('junc_mhs_syarat', 'jms_mhs_id = mhs_id');
 		$this->db->where('civitas_id', $civitas_id);
+		$this->db->where('jms_civitas_id = civitas_id');
+		$this->db->where('mhs_jenjang = syarat_jenjang');
+		$this->db->where('jms_syarat_id = syarat_id');
 		$this->db->group_by('mhs_id');
 		return $this->db->get()->result();
 	}

@@ -43,9 +43,12 @@ class Civitas_model extends CI_Model {
 		$this->db->from('civitas');
 		$this->db->join('junc_mhs_civitas', 'jmc_civitas_id = civitas_id');
 		$this->db->join('mhs', 'jmc_mhs_id = mhs_id');
-		$this->db->join('syarat', 'civitas_id = syarat_civitas_id');
-		$this->db->join('junc_mhs_syarat', 'jms_mhs_id = mhs_id');
+		$this->db->join('syarat', 'civitas_id = syarat_civitas_id', 'LEFT');
+		$this->db->join('junc_mhs_syarat', 'jms_mhs_id = mhs_id AND jms_syarat_id = syarat_id', 'LEFT');
 		$this->db->where('mhs_id', $mhs_id);
+		// $this->db->where('jms_civitas_id = civitas_id');
+		// $this->db->where('mhs_jenjang = syarat_jenjang');
+		// $this->db->where('jms_syarat_id = syarat_id');
 		$this->db->group_by('civitas_id');
 		return $this->db->get()->result();
 	}

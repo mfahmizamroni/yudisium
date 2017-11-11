@@ -33,9 +33,15 @@ class User extends CI_Controller {
 		
 		if ($this->form_validation->run() == false) {
 
-			if ($this->session->has_userdata('username') && $this->session->userdata('role') == 1) {
+			if ($this->session->has_userdata('username') && $this->session->userdata('role') == 0) {
 				$this->load->helper('url');
 				header('location:'.base_url().'super');
+			} else if ($this->session->has_userdata('username') && $this->session->userdata('role') == 2) {
+				$this->load->helper('url');
+				header('location:'.base_url().'perpus/daftarMahasiswa');
+			} else if ($this->session->has_userdata('username') && $this->session->userdata('role') == 3) {
+				$this->load->helper('url');
+				header('location:'.base_url().'perpus/daftarMahasiswa');
 			} else if ($this->session->has_userdata('username')) {
 				$this->load->helper('url');
 				header('location:'.base_url().'form/daftarMahasiswa');
@@ -81,10 +87,17 @@ class User extends CI_Controller {
 				$this->session->set_userdata($newdata);
 				
 				// user login ok
+				var_dump($this->session->userdata('role'));
 				if ($this->session->userdata('role') == 0) {
 					$this->load->helper('url');
 					header('location:'.base_url().'super');
-				} else {
+				} else if ($this->session->userdata('role') == 2 OR $this->session->userdata('role') == 3){
+					$this->load->helper('url');
+					header('location:'.base_url().'perpus/daftarMahasiswa');
+				} else if ($this->session->userdata('role') == 4){
+					$this->load->helper('url');
+					header('location:'.base_url().'bapkm');
+				} else if ($this->session->userdata('role') == 1) {
 					$this->load->helper('url');
 					header('location:'.base_url().'form/daftarMahasiswa');
 				}

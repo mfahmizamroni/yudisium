@@ -11,7 +11,7 @@
 					</div><!--end .col -->
 				</div><!--end .row -->
 				<!-- BEGIN VERTICAL FORM FLOATING LABELS -->
-				<?= form_open('super/editUserCivitas/'.$user->adm_id, array('class' => "form floating-label" )) ?>
+				<?= form_open('perpus/editUserCivitas/'.$user->adm_id, array('class' => "form floating-label" )) ?>
 				<div class="card">
 					<div class="card-head style-primary">
 						<header>User - Civitas</header>
@@ -38,15 +38,7 @@
 							<input type="password" class="form-control" name="password_confirm" value="11111">
 							<label for="Password2">Password Confirm</label>
 						</div>
-						<div class="form-group">
-							<select id="select1" name="civitas" class="form-control">
-								<option value="">&nbsp;</option>
-								<?php foreach ($civitas as $civitass) { ?>
-								<option value="<?= $civitass->civitas_id ?>" <?php if ($user->adm_civitas_id == $civitass->civitas_id) {echo "selected";} ?>><?= $civitass->civitas_nama ?></option>
-								<?php } ?>
-							</select>
-							<label for="select1">Nama Civitas</label>
-						</div>
+						<input type="hidden" name="civitas" value="0">
 						<br>
 
 					</div><!--end .card-body -->

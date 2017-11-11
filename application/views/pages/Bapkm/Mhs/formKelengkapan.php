@@ -6,7 +6,7 @@
 				<div class="section-body contain-lg">
 					<div class="row">
 						<div class="col-lg-12 text-center">
-							<h1><span class=" text-light">Daftar Civitas</span></h1>
+							<h1><span class=" text-light">Form Kelengkapan Berkas Yudisium</span></h1>
 							<h2><span class="text-light">Departemen <?= $departemen->departemen_nama ?></span></h2>
 						</div><!--end .col -->
 					</div><!--end .row -->
@@ -17,11 +17,19 @@
 			<!-- Begin Card -->
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
+				<hr>
+				<!-- begin identitas -->
+				<div class="row">
+					<div class="col-lg-12">
+						<h1 class="text-primary"><?= $mahasiswa->mhs_nama ?></h1>
+					</div><!--end .col -->
+				</div><!--end .row -->
+				<br>
 
 				<div class="col-md-12">
 					<div class="card card-bordered style-primary">
 						<div class="card-head">
-							<header><i class="fa fa-fw fa-tag"></i>Daftar Civitas Departemen <?= $departemen->departemen_nama ?></header>
+							<header><i class="fa fa-fw fa-tag"></i>Daftar Kelengkapan Berkas Yudisium</header>
 						</div>
 						<!--end .card-head -->
 
@@ -30,25 +38,26 @@
 								<thead>
 									<tr>
 										<th>No.</th>
-										<th>Nama</th>
-										<th>Username</th>
-										<th>Email</th>
-										<th>Civitas</th>
+										<th>Syarat Yudisium</th>
+										<th>Status</th>
+										<th>Keterangan</th>
 										<th>#</th>
 									</tr>
 								</thead>
 								<tbody>
 									<?php $a = 1;
-									foreach ($user as $users) { ?>
+									foreach ($formBebas as $formBebass) { ?>
 									<tr>
 										<td><?= $a ?></td>
-										<td><?= $users->adm_nama ?></td>
-										<td><?= $users->adm_username ?></td>
-										<td><?= $users->adm_email ?></td>
-										<td><?= $users->civitas_nama ?></td>
+										<td>Form Bebas <?= $formBebass->civitas_nama ?></td>
+										<?php if ($formBebass->minstat == 0) { ?>
+										<td><a class="btn btn-xs ink-reaction btn-danger disabled">Not Approved</a></td>
+										<?php } else { ?>
+										<td><a class="btn btn-xs ink-reaction btn-success">Approved</a></td>
+										<?php } ?>
+										<td><?= $formBebass->jmc_catatan ?></td>
 										<td>
-											<a href="<?= base_url().'super/editUserCivitas/'.$users->adm_id ?>"><button class="btn ink-reaction btn-primary btn-xs"><i class="fa fa-fw fa-pencil"></i></button></a>
-											<a href="<?= base_url().'super/deleteUserCivitas/'.$users->adm_id ?>"><button class="btn ink-reaction btn-danger btn-xs"><i class="fa fa-fw fa-trash"></i></button></a>	
+											<a href="<?= base_url()."bapkm/detailSyaratYudisium/".$formBebass->civitas_id."/".$mhs_id ?>"><button class="btn btn-primary btn-xs ink-reaction">Details</button></a>		
 										</td>
 									</tr>
 									<?php $a++; } ?>
@@ -57,8 +66,8 @@
 							<br><br>
 						</div>
 						<!--end .card-body -->
-					</div>
-				</div><!--end .col -->
+					</div><!--end .col -->
+				</div>
 				<br><br>
 			</div><!--end .col -->
 			<!-- EndCard -->

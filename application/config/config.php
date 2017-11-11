@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/yudisium/';
+$config['base_url'] = 'http://192.168.1.3/yudisium/';
 
 /*
 |--------------------------------------------------------------------------
@@ -383,7 +383,7 @@ $config['sess_expiration'] = 0;
 $config['sess_save_path'] = 'ci_sessions';
 $config['sess_match_ip'] = TRUE;
 $config['sess_time_to_update'] = 300;
-$config['sess_regenerate_destroy'] = FALSE;
+$config['sess_regenerate_destroy'] = TRUE;
 
 /*
 |--------------------------------------------------------------------------

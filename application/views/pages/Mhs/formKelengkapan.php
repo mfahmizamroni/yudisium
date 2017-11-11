@@ -39,9 +39,8 @@
 									<tr>
 										<th>No.</th>
 										<th>Syarat Yudisium</th>
-										<th>Nama Civitas</th>
 										<th>Status</th>
-										<th>Keterangan</th>
+										<th>Catatan</th>
 										<th>#</th>
 									</tr>
 								</thead>
@@ -50,8 +49,7 @@
 									foreach ($civitas as $civitass) { ?>
 									<tr>
 										<td><?= $a ?></td>
-										<td><?= $civitass->civitas_form_bebas ?></td>
-										<td><?= $civitass->civitas_nama ?></td>
+										<td>Form Bebas <?= $civitass->civitas_nama ?></td>
 										<?php if ($civitass->minstat == 0) { ?>
 										<td><a class="btn btn-xs ink-reaction btn-danger disabled">Not Approved</a></td>
 										<?php } else { ?>
@@ -68,11 +66,12 @@
 							<br><br>
 						</div>
 						<!--end .card-body -->
-					</div><!--end .col -->
-					<br><br>
+					</div>
 				</div><!--end .col -->
-				<!-- EndCard -->
-				<div class="col-md-2"></div>
+				<br><br>
+			</div><!--end .col -->
+			<!-- EndCard -->
+			<div class="col-md-2"></div>
 
-			</div><!--end #content-->
+		</div><!--end #content-->
 		<!-- END CONTENT -->

@@ -7,7 +7,7 @@
             </a>
           </div>
           <div class="expanded">
-            <a href="<?php echo base_url();?>Mhs">
+            <a href="../../html/dashboards/dashboard.html">
               <span class="text-lg text-bold text-primary ">SIM&nbsp;YUDISIUM</span>
             </a>
           </div>
@@ -19,15 +19,26 @@
 
             <!-- BEGIN DASHBOARD -->
             <li>
-              <a href="<?php echo base_url();?>Mhs">
+              <a href="">
                 <div class="gui-icon"><i class="fa fa-user"></i></div>
-                <span class="title">Form Kelengkapan</span>
+                <span class="title">Mahasiswa</span>
+              </a>
+            </li><!--end /menu-li -->
+
+            <li>
+              <a href="">
+                <div class="gui-icon"><i class="fa fa-user"></i></div>
+                <span class="title">Instansi</span>
+              </a>
+
+            </li><!--end /menu-li -->
+            <li>
+              <a href="">
+                <div class="gui-icon"><i class="fa fa-user"></i></div>
+                <span class="title">Syarat Yudisium</span>
               </a>
             </li><!--end /menu-li -->
             <!-- END DASHBOARD -->
-
-            <!-- BEGIN EMAIL -->
-            <!-- END EMAIL -->
 
           </ul><!--end .main-menu -->
           <!-- END MAIN MENU -->
@@ -40,6 +51,6 @@
         </div><!--end .menubar-scroll-panel-->
       </div><!--end #menubar-->
       <!-- END MENUBAR -->
-      
+
 </div><!--end #base-->
 <!-- END BASE -->

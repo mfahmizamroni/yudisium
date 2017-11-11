@@ -7,7 +7,7 @@
             </a>
           </div>
           <div class="expanded">
-            <a href="../../html/dashboards/dashboard.html">
+            <a href="<?php echo base_url();?>form/daftarMahasiswa">
               <span class="text-lg text-bold text-primary ">SIM&nbsp;YUDISIUM</span>
             </a>
           </div>
@@ -19,7 +19,7 @@
 
             <!-- BEGIN DASHBOARD -->
             <li>
-              <a href="">
+              <a href="<?php echo base_url();?>form/daftarMahasiswa">
                 <div class="gui-icon"><i class="fa fa-user"></i></div>
                 <span class="title">Daftar Mahasiswa</span>
               </a>
@@ -34,8 +34,8 @@
               </a>
               <!--start submenu -->
               <ul>
-                <li><a href="" ><span class="title">Tambah Syarat</span></a></li>
-                <li><a href="../../html/mail/compose.html" ><span class="title">Syarat Yudisium</span></a></li>
+                <li><a href="<?php echo base_url();?>syarat/daftarSyaratYudisium" ><span class="title">Daftar Syarat Yudisium</span></a></li>
+                <li><a href="<?php echo base_url();?>syarat/addSyaratYudisium" ><span class="title">Tambah Syarat</span></a></li>
               </ul><!--end /submenu -->
             </li><!--end /menu-li -->
             <!-- END EMAIL -->

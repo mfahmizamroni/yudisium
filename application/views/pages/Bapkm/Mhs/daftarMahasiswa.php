@@ -6,8 +6,8 @@
 				<div class="section-body contain-lg">
 					<div class="row">
 						<div class="col-lg-12 text-center">
-							<h1><span class="text-xl text-light"><?= $civitas->civitas_nama ?></span></h1>
-							<h2><span class="text-light"><?= $civitas->civitas_tipe ?></span></h2>
+							<h1><span class="text-xl text-light"><?= $this->session->userdata('civitas_nama') ?></span></h1>
+							<h2><span class="text-light"><?= $this->session->userdata('civitas_tipe') ?></span></h2>
 							<h3 class="text-light">Cari Daftar Mahasiswa Yudisium <i class="fa fa-search-minus text-primary"></i></h3>
 						</div><!--end .col -->
 					</div><!--end .row -->
@@ -31,7 +31,6 @@
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
 				<div class="card">
-					<?= form_open() ?>
 					<div class="card-body">
 						<!-- BEGIN DATATABLE 1 -->
 						<div class="row">
@@ -45,6 +44,7 @@
 												<th>No.</th>
 												<th>NRP</th>
 												<th>Nama</th>
+												<th>Jenjang</th>
 												<th>Status</th>
 												<th>Catatan</th>
 												<th>Action</th>
@@ -59,6 +59,7 @@
 												<input type="hidden" name="mhs[]" value="<?= $mahasiswas->mhs_id ?>" disabled>
 												<td><?= $mahasiswas->mhs_nrp ?></td>
 												<td><?= $mahasiswas->mhs_nama ?></td>
+												<td><?= $mahasiswas->mhs_jenjang ?></td>
 												<?php if ($mahasiswas->minstat == 0) { ?>
 												<td><a class="btn btn-xs ink-reaction btn-danger disabled">Not Approved</a></td>
 												<?php } else { ?>
@@ -66,7 +67,7 @@
 												<?php } ?>
 												<td><?= $mahasiswas->jmc_catatan ?></td>
 												<td>
-													<a href="<?= base_url()."super/detailMahasiswa/".$mahasiswas->mhs_id."/".$civitas->civitas_id ?>" class="btn btn-xs ink-reaction btn-primary">Details</a>
+													<a href="<?= base_url()."bapkm/formKelengkapanMahasiswa/".$mahasiswas->mhs_id?>" class="btn btn-xs ink-reaction btn-primary">Details</a>
 												</td>
 											</tr>
 											<?php $a++; } ?>
@@ -79,24 +80,23 @@
 					</div><!--end .card-body -->
 					<div class="card-actionbar">
 						<div class="card-actionbar-row">
-							<div class="input-group-btn">
-								<button type="button" class="btn btn-default" tabindex="-1">Action</button>
-								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" tabindex="-1">
-									<span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu pull-right" role="menu">
-									<li><a href=""><button type="submit" class="btn btn-primary" name="status" value="1">Approve</button></a></li>
-									<li><a href=""><button type="submit" class="btn btn-danger" name="status" value="0">Cancel Approval</button></a></li>
-								</ul>
+								<!-- <div class="input-group-btn">
+									<button type="button" class="btn btn-default" tabindex="-1">Action</button>
+									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" tabindex="-1">
+										<span class="caret"></span>
+									</button>
+									<ul class="dropdown-menu pull-right" role="menu">
+										<li><a href=""><button type="submit" class="btn btn-primary" name="status" value="1">Approve</button></a></li>
+										<li><a href=""><button type="submit" class="btn btn-danger" name="status" value="0">Cancel Approval</button></a></li>
+									</ul>
+								</div> -->
 							</div>
 						</div>
-					</div>
-					<?php form_close() ?>
-					<br>
-				</div><!--end .card -->
-				<br><br><br>
-			</div><!--end .col -->
-			<!-- EndCard -->
+						<br>
+					</div><!--end .card -->
+					<br><br><br>
+				</div><!--end .col -->
+				<!-- EndCard -->
 
 
 			<div class="col-md-2"></div>

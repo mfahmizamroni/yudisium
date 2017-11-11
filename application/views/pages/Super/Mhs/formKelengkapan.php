@@ -39,7 +39,6 @@
 									<tr>
 										<th>No.</th>
 										<th>Syarat Yudisium</th>
-										<th>Nama Civitas</th>
 										<th>Status</th>
 										<th>Keterangan</th>
 										<th>#</th>
@@ -50,8 +49,7 @@
 									foreach ($formBebas as $formBebass) { ?>
 									<tr>
 										<td><?= $a ?></td>
-										<td><?= $formBebass->civitas_form_bebas ?></td>
-										<td><?= $formBebass->civitas_nama ?></td>
+										<td>Form Bebas <?= $formBebass->civitas_nama ?></td>
 										<?php if ($formBebass->minstat == 0) { ?>
 										<td><a class="btn btn-xs ink-reaction btn-danger disabled">Not Approved</a></td>
 										<?php } else { ?>
@@ -69,10 +67,11 @@
 						</div>
 						<!--end .card-body -->
 					</div><!--end .col -->
-					<br><br>
-				</div><!--end .col -->
-				<!-- EndCard -->
-				<div class="col-md-2"></div>
+				</div>
+				<br><br>
+			</div><!--end .col -->
+			<!-- EndCard -->
+			<div class="col-md-2"></div>
 
-			</div><!--end #content-->
+		</div><!--end #content-->
 		<!-- END CONTENT -->

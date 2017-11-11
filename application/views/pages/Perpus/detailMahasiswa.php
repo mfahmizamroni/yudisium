@@ -82,8 +82,8 @@
 					</div><!--end .col -->
 					<br><br>
 				</div><!--end .col -->
+				<!-- EndCard -->
 			</div>
-			<!-- EndCard -->
 			<div class="col-md-2"></div>
 
 		</div><!--end #content-->

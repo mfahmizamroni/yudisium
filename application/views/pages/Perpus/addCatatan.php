@@ -11,7 +11,7 @@
 						<h1 class="text-primary">Catatan Mahasiswa</h1>
 					</div><!--end .col -->
 				</div><!--end .row -->
-				<?= form_open('form/addCatatan/'.$id, array('class' => "form floating-label" )) ?>
+				<?= form_open('perpus/addCatatan/'.$id, array('class' => "form floating-label" )) ?>
 				<div class="card">
 					<div class="card-head style-primary">
 						<header>Tambah Catatan</header>
@@ -32,8 +32,8 @@
 						</div>
 					</div>
 				</div><!--end .card -->
-				<?php form_close() ?>
 				<br>
+				<?php form_close() ?>
 			</div>
 
 			<div class="col-md-2"></div>

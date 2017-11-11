@@ -6,8 +6,8 @@
 				<div class="section-body contain-lg">
 					<div class="row">
 						<div class="col-lg-12 text-center">
-							<h1><span class="text-xl text-light"><?= $civitas->civitas_nama ?></span></h1>
-							<h2><span class="text-light"><?= $civitas->civitas_tipe ?></span></h2>
+							<h1><span class="text-xl text-light"><?= $this->session->userdata('civitas_nama') ?></span></h1>
+							<h2><span class="text-light"><?= $this->session->userdata('civitas_tipe') ?></span></h2>
 							<h3 class="text-light">Cari Daftar Mahasiswa Yudisium <i class="fa fa-search-minus text-primary"></i></h3>
 						</div><!--end .col -->
 					</div><!--end .row -->
@@ -47,6 +47,7 @@
 												<th>Nama</th>
 												<th>Status</th>
 												<th>Catatan</th>
+												<th>Jenjang</th>
 												<th>Action</th>
 											</tr>
 										</thead>
@@ -65,8 +66,9 @@
 												<td><a class="btn btn-xs ink-reaction btn-success">Approved</a></td>
 												<?php } ?>
 												<td><?= $mahasiswas->jmc_catatan ?></td>
+												<td><?= $mahasiswas->mhs_jenjang ?></td>
 												<td>
-													<a href="<?= base_url()."super/detailMahasiswa/".$mahasiswas->mhs_id."/".$civitas->civitas_id ?>" class="btn btn-xs ink-reaction btn-primary">Details</a>
+													<a href="<?= base_url()."perpus/detailMahasiswa/".$mahasiswas->mhs_id?>" class="btn btn-xs ink-reaction btn-primary">Details</a>
 												</td>
 											</tr>
 											<?php $a++; } ?>
@@ -102,4 +104,4 @@
 			<div class="col-md-2"></div>
 
 		</div><!--end #content-->
-		<!-- END CONTENT -->
+	<!-- END CONTENT -->

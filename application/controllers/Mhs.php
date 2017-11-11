@@ -220,6 +220,7 @@ class Mhs extends CI_Controller {
 				for ($i=0; $i < count($syaratperpus); $i++) { 
 					if ($syaratperpus[$i]->syarat_jenjang == $this->session->userdata('jenjang')) {
 						$this->syarat_model->update_jms($check_jms[$a]->jms_mhs_id, $check_jms[$a]->jms_syarat_id, $id, $syaratperpus[$i]->syarat_id);
+						$a++;
 					}
 				}
 			} else {

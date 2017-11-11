@@ -6,8 +6,8 @@
 				<div class="section-body contain-lg">
 					<div class="row">
 						<div class="col-lg-12 text-center">
-							<h1><span class="text-xl text-light"><?= $this->session->userdata('civitas_nama') ?></span></h1>
-							<h2><span class="text-light"><?= $this->session->userdata('civitas_tipe') ?></span></h2>
+							<h1><span class="text-xl text-light"><?= $civitas->civitas_nama ?></span></h1>
+							<h2><span class="text-light"><?= $civitas->civitas_tipe ?></span></h2>
 							<h3 class="text-light">Detail Berkas Mahasiswa</h3>
 						</div><!--end .col -->
 					</div><!--end .row -->
@@ -60,7 +60,7 @@
 										<td>
 											<div class="checkbox checkbox-styled">
 												<label>
-													<input type="checkbox" name="status<?= $a; ?>" value="1" <?php if ($mahasiswas->jms_status == 1) {echo "checked";} ?>>
+													<input type="checkbox" name="status<?= $a; ?>" value="1" <?php if ($mahasiswas->jms_status == 1) {echo "checked";} ?> <?php if ($this->session->userdata('departemen_id') != $mahasiswas->civitas_departemen_id) {echo "disabled";} ?>>
 												</label>
 											</div>
 										</td>
@@ -76,9 +76,9 @@
 								</div>
 							</div>
 						</div>
-						<?php form_close() ?>
-						<!--end .card-body -->
-						<!--  --><!--end .card -->	
+						</form>
+					<!--end .card-body -->
+					<!--  --><!--end .card -->	
 					</div><!--end .col -->
 					<br><br>
 				</div><!--end .col -->
